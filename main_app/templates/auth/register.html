@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
+<head>
+
+<!--    <meta charset="utf-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <meta name="description" content="">-->
+<!--    <meta name="author" content="">-->
+
+    <title>EHR Register</title>
+
+    <!-- Custom fonts for this template-->
+<!--    <link href="./static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Custom styles for this template&ndash;&gt;-->
+<!--    <link href="./static/css/sb-admin-2.min.css" rel="stylesheet">-->
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+{#                <div class="row">#}
+{#                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>#}
+                <center>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user" method="post">
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-1">
+                                        <select class="custom-select" name="register_type" id="register_type" onchange="change_type(this.options[this.selectedIndex].value)">
+                                            <option value="patient">I am a patient</option>
+                                            <option value="admin">I am an admin</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-1">
+                                        <select class="custom-select" name="gender" id="gender">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="LastName" name="last_name" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="FirstName" name="first_name" placeholder="First Name" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-user" id="secret_key" name="secret_key" placeholder="Secret Key" hidden disabled required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Email" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="date" class="form-control form-control-user" id="birthday" name="birthday" placeholder="Birthday" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-user" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-user" id="emergency_contacts" name="emergency_contacts" placeholder="Emergency Contacts" required>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user" id="repeat_password" name="repeat_password" placeholder="Repeat Password" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" id="height" name="height" placeholder="Height" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control form-control-user" id="weight" name="weight" placeholder="Weight" required>
+                                    </div>
+                                </div>
+
+                                <input type='submit' value='Register' class="btn btn-primary btn-user btn-block">
+                                <hr>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/forgot-password">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/auth/login">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                    </center>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+<!--    <script src="./static/vendor/jquery/jquery.min.js"></script>-->
+<!--    <script src="./static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+<!--    &lt;!&ndash; Core plugin JavaScript&ndash;&gt;-->
+<!--    <script src="./static/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+
+<!--    &lt;!&ndash; Custom scripts for all pages&ndash;&gt;-->
+<!--    <script src="./static/js/sb-admin-2.min.js"></script>-->
+
+</body>
+{% endblock %}
+
+<script>
+    // function change_gender(value) {
+    //     document.getElementById("gender").value = value
+    // }
+    function change_type(value) {
+        if (value === "admin"){
+            console.log("admin");
+            hide_show_admin(false);
+            hide_show_patient(true);
+        }
+        else if (value === "patient"){
+            console.log("patient");
+            hide_show_admin(true);
+            hide_show_patient(false);
+        }
+    }
+
+    function hide_show_admin(state){
+        console.log(state);
+        document.getElementById("secret_key").hidden = state;
+        document.getElementById("secret_key").disabled = state;
+    }
+
+    function hide_show_patient(state){
+        document.getElementById("height").hidden = state;
+        document.getElementById("weight").hidden = state;
+        document.getElementById("birthday").hidden = state;
+        document.getElementById("emergency_contacts").hidden = state;
+        document.getElementById("height").disabled = state;
+        document.getElementById("weight").disabled = state;
+        document.getElementById("birthday").disabled = state;
+        document.getElementById("emergency_contacts").disabled = state;
+    }
+</script>
+
+</html>
+

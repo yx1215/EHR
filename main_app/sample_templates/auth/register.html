@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+    <label for="register_type">Register_type</label>
+      <select name="register_type" id="register_type" onchange="change_type(this.options[this.selectedIndex].value)">
+          <option value="patient" selected>I am a patient</option>
+          <option value="admin">I am an admin</option>
+      </select>
+
+    <label for="name">Username</label>
+    <input name="name" id="name" required>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+
+    <label for="email">email</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="phone_number">Phone_number</label>
+    <input type="number" name="phone_number" id="phone_number" required>
+
+    <label for="gender">Gender</label>
+        <select name="gender" id="gender">
+            <option value="male" selected>male</option>
+            <option value="female">female</option>
+        </select>
+
+    <label for="secret_key" id="key_label" hidden>Secret key</label>
+    <input type="number" name="secret_key" id="secret_key" disabled hidden required>
+
+    <label for="weight" id="weight_label">Weight</label>
+    <input type="text" name="weight" id="weight" required>
+
+    <label for="height" id="height_label">Height</label>
+    <input type="text" name="height" id="height" required>
+
+    <label for="birthday" id="birthday_label">Birthday</label>
+    <input type="date" name="birthday" id="birthday" required>
+
+    <label for="emergency_contacts" id="emergency_contacts_label">Emergency Contacts</label>
+    <input type="number" name="emergency_contacts" id="emergency_contacts" required>
+
+    <input type="submit" value="Register">
+  </form>
+
+<script>
+    // function change_gender(value) {
+    //     document.getElementById("gender").value = value
+    // }
+    function change_type(value) {
+        if (value === "admin"){
+            console.log("admin");
+            hide_show_admin(false);
+            hide_show_patient(true);
+        }
+        else if (value === "patient"){
+            console.log("patient");
+            hide_show_admin(true);
+            hide_show_patient(false);
+        }
+    }
+
+    function hide_show_admin(state){
+        document.getElementById("key_label").hidden = state;
+        document.getElementById("secret_key").hidden = state;
+        document.getElementById("secret_key").disabled = state;
+    }
+
+    function hide_show_patient(state){
+        document.getElementById("height").hidden = state;
+        document.getElementById("weight").hidden = state;
+        document.getElementById("birthday").hidden = state;
+        document.getElementById("emergency_contacts").hidden = state;
+        document.getElementById("height").disabled = state;
+        document.getElementById("weight").disabled = state;
+        document.getElementById("birthday").disabled = state;
+        document.getElementById("emergency_contacts").disabled = state;
+        document.getElementById("height_label").hidden = state;
+        document.getElementById("weight_label").hidden = state;
+        document.getElementById("birthday_label").hidden = state;
+        document.getElementById("emergency_contacts_label").hidden = state;
+    }
+</script>
+
+{% endblock %}
+
