@@ -28,7 +28,7 @@ def get_doctor(id):
     return doctor
 
 
-@admin_bp.route('/register_doctor', methods=('GET', 'POST'))
+@admin_bp.route('/admin_page', methods=('GET', 'POST'))
 @login_required
 def register_doctor():
     if request.method == 'POST':
