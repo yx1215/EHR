@@ -34,7 +34,8 @@ def register_doctor():
     if request.method == 'POST':
         db = get_db()
         error = None
-        name = request.form["name"]
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
         password = request.form["password"]
         email = request.form["email"]
         phone_number = request.form["phone_number"]
@@ -44,7 +45,7 @@ def register_doctor():
         date_of_birth = request.form['birthday']
         date_of_join = request.form['date_of_join']
 
-        if not name:
+        if not last_name or not first_name:
             error = "name is required."
         elif not password:
             error = "password is required."
@@ -64,16 +65,16 @@ def register_doctor():
         if error is None:
             db.execute(
                 'INSERT INTO doctors '
-                '(password, name, email, phone_number, gender, field, introduction, date_of_birth, date_of_join) VALUES'
-                '(?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (generate_password_hash(password), name, email, phone_number, gender, field, introduction, date_of_birth, date_of_join)
+                '(password, first_name, last_name, email, phone_number, gender, field, introduction, date_of_birth, date_of_join) VALUES'
+                '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (generate_password_hash(password), first_name, last_name, email, phone_number, gender, field, introduction, date_of_birth, date_of_join)
                 )
             db.commit()
             return redirect(url_for('admin.register_doctor'))
 
         flash(error)
         # template not written
-    return render_template('/doctor.html')
+    return render_template('/administrator.html')
 
 
 @admin_bp.route('/<int:id>/delete_doctor', methods=("POST", ))

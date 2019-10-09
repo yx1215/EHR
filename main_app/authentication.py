@@ -154,8 +154,10 @@ def login():
 
 @auth_bp.before_app_request
 def load_logged_in_user():
+    print("here")
     user_id = session.get('user_id')
     login_type = session.get('login_type')
+
     if user_id is None:
         g.user = None
     else:
@@ -171,6 +173,7 @@ def load_logged_in_user():
             g.user = get_db().execute(
                 'SELECT * FROM doctors WHERE id = ?', (user_id,)
             ).fetchone()
+    print(g.user["last_name"])
 
 
 @auth_bp.route('/logout')
