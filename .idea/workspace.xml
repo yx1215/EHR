@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ERH.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ERH.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/main_app.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/instance/main_app.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/templates/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/administrator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/auth/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -222,7 +225,13 @@
       <workItem from="1570126674847" duration="2984000" />
       <workItem from="1570526260086" duration="2380000" />
       <workItem from="1570622247345" duration="5632000" />
-      <workItem from="1570669775808" duration="1084000" />
+      <workItem from="1570669775808" duration="2060000" />
+      <workItem from="1570695608352" duration="383000" />
+      <workItem from="1570786168545" duration="1131000" />
+      <workItem from="1570796717185" duration="63000" />
+      <workItem from="1570798327781" duration="1994000" />
+      <workItem from="1570957484781" duration="1145000" />
+      <workItem from="1571068667036" duration="602000" />
     </task>
     <task id="LOCAL-00001" summary="change register.html">
       <created>1570293454733</created>
@@ -252,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570626524261</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="change">
+      <created>1570671700369</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1570671700369</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -10,12 +10,7 @@ from main_app.database import get_db
 admin_bp = Blueprint('admin', __name__, url_prefix="")
 
 
-@admin_bp.route('/admin')
-def show_doctor():
-    db = get_db()
-    all_doctors = db.execute('SELECT * FROM doctors').fetchall()
-    # template not written
-    return render_template('', all_doctors=all_doctors)
+
 
 
 def get_doctor(id):
@@ -75,6 +70,14 @@ def register_doctor():
         flash(error)
         # template not written
     return render_template('/administrator.html')
+
+
+@admin_bp.route('/admin_page')
+def show_doctor():
+    db = get_db()
+    all_doctors = db.execute('SELECT * FROM doctors').fetchall()
+    # template not written
+    return render_template('', all_doctors=all_doctors)
 
 
 @admin_bp.route('/<int:id>/delete_doctor', methods=("POST", ))
