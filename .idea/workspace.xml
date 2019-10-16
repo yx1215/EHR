@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="Merge branch 'master' of https://github.com/yx1215/Software_engineering&#10;&#10;# Conflicts:&#10;#&#9;.coverage&#10;#&#9;tests/testdata.sql">
+    <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/testdata.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testdata.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/h3-py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/administrator.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -223,7 +225,7 @@
       <workItem from="1570798327781" duration="1994000" />
       <workItem from="1570957484781" duration="1145000" />
       <workItem from="1571068667036" duration="3461000" />
-      <workItem from="1571231003751" duration="3240000" />
+      <workItem from="1571231003751" duration="4499000" />
     </task>
     <task id="LOCAL-00001" summary="change register.html">
       <created>1570293454733</created>
@@ -274,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571236187809</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Merge branch 'master' of https://github.com/yx1215/Software_engineering&#10;&#10;# Conflicts:&#10;#&#9;.coverage&#10;#&#9;tests/testdata.sql">
+      <created>1571237126056</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1571237126056</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
