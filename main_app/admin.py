@@ -42,6 +42,10 @@ def register_doctor():
             error = "name is required."
         elif not password:
             error = "password is required."
+        elif not repeat_password:
+            error = "repeat_password is required."
+        elif password != repeat_password:
+            error = "password and repeat_password not matched"
         elif not email:
             error = "email is required."
         elif not phone_number:
