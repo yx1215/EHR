@@ -1,4 +1,7 @@
 import pytest
+import sys
+import os
+
 from main_app.database import get_db
 
 def test_index(client, auth):
