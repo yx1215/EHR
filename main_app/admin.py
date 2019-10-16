@@ -10,9 +10,6 @@ from main_app.database import get_db
 admin_bp = Blueprint('admin', __name__, url_prefix="")
 
 
-
-
-
 def get_doctor(id):
     db = get_db()
     doctor = db.execute('SELECT * FROM doctors WHERE id = ?', (id, ))
@@ -32,6 +29,7 @@ def register_doctor():
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
         password = request.form["password"]
+        repeat_password = request.form["repeat_password"]
         email = request.form["email"]
         phone_number = request.form["phone_number"]
         gender = request.form["gender"]
@@ -56,6 +54,8 @@ def register_doctor():
             error = "birthday is required."
         elif not date_of_join:
             error = "date of join is required."
+        elif not repeat_password:
+            error = "repeat_password is required."
 
         if error is None:
             db.execute(

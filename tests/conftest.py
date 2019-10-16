@@ -3,6 +3,7 @@ import tempfile
 
 import pytest
 from main_app import create_app
+
 from main_app.database import get_db, init_db
 
 with open(os.path.join(os.path.dirname(__file__), 'testdata.sql'), 'rb') as f:
