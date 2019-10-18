@@ -6,8 +6,16 @@ from werkzeug.security import generate_password_hash
 
 from main_app.authentication import login_required
 from main_app.database import get_db
+import json
+
 
 admin_bp = Blueprint('admin', __name__, url_prefix="/admin")
+
+
+def get_all_doctors():
+    db = get_db()
+    all_doctors = db.execute('SELECT * FROM doctors').fetchall()
+    return all_doctors
 
 
 def get_doctor(id):
@@ -23,8 +31,8 @@ def get_doctor(id):
 @admin_bp.route('/admin_page', methods=('GET', 'POST'))
 @login_required
 def show_main():
-
-    return render_template('/administrator.html')
+    doctors = get_all_doctors()
+    return render_template('/administrator.html', all_doctors=doctors)
 
 
 @admin_bp.route('/add_doctor', methods=('GET', 'POST'))
@@ -45,29 +53,32 @@ def add_doctor():
         introduction = request.form['introduction']
         date_of_birth = request.form['birthday']
         date_of_join = request.form['date_of_join']
-
-        if not last_name or not first_name:
-            error = "name is required."
-        elif not password:
-            error = "password is required."
-        elif not repeat_password:
-            error = "repeat_password is required."
-        elif password != repeat_password:
-            error = "password and repeat_password not matched"
-        elif not email:
-            error = "email is required."
-        elif not phone_number:
-            error = "phone_number is required."
-        elif not gender:
-            error = "gender is required."
-        elif not field:
-            error = "field is required."
-        elif not date_of_birth:
-            error = "birthday is required."
-        elif not date_of_join:
-            error = "date of join is required."
-        elif not repeat_password:
-            error = "repeat_password is required."
+        current = db.execute('SELECT * FROM doctors WHERE email=(?)', (email, )).fetchone()
+        if current is not None:
+            error = "doctor already exists"
+        else:
+            if not last_name or not first_name:
+                error = "name is required."
+            elif not password:
+                error = "password is required."
+            elif not repeat_password:
+                error = "repeat_password is required."
+            elif password != repeat_password:
+                error = "password and repeat_password not matched"
+            elif not email:
+                error = "email is required."
+            elif not phone_number:
+                error = "phone_number is required."
+            elif not gender:
+                error = "gender is required."
+            elif not field:
+                error = "field is required."
+            elif not date_of_birth:
+                error = "birthday is required."
+            elif not date_of_join:
+                error = "date of join is required."
+            elif not repeat_password:
+                error = "repeat_password is required."
 
         if error is None:
             db.execute(
@@ -78,26 +89,19 @@ def add_doctor():
                 )
             db.commit()
             flash("Successfully add a doctor.")
-            return render_template('/administrator.html')
+            return redirect(url_for('admin.show_main'))
 
         flash(error)
         # template not written
-    return render_template('/administrator.html')
+    return redirect(url_for('admin.show_main'))
 
 
-@admin_bp.route('/admin_page')
-def show_doctor():
-    db = get_db()
-    all_doctors = db.execute('SELECT * FROM doctors').fetchall()
-    # template not written
-    return render_template('', all_doctors=all_doctors)
-
-
-@admin_bp.route('/<int:id>/delete_doctor', methods=("POST", ))
+@admin_bp.route('/delete_doctor', methods=("POST", ))
 @login_required
-def delete_doctor(id):
-    get_doctor(id)
+def delete_doctor():
+    doctor_id = request.args.get("id")
+    print(doctor_id)
     db = get_db()
-    db.execute('DELETE FROM doctors WHERE id = ?', (id, ))
+    db.execute('DELETE FROM doctors WHERE id = ?', (doctor_id, ))
     db.commit()
-    return redirect(url_for('admin.show_doctor'))
+    return redirect(url_for('admin.show_main'))

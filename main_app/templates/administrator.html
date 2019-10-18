@@ -355,32 +355,43 @@
                                 <div class='card col-2 mb-4'>
                                     <div id="" style="height:300px; overflow-y:scroll;">
                                         <div id="doctor_list" class="list-group">
-                                            <a class="list-group-item list-group-item-action" href="#list-item-1"> Doctor_1</a>
-                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>
-                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>
-                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>
-                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>
-                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>
-                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>
+                                            {% for doctor in all_doctors %}
+                                            <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}')">
+                                                {{doctor["last_name"] + " " + doctor["first_name"]}}
+                                            </a>
+                                            {% endfor %}
+                                            <strong id="current_id" hidden>init</strong>
+<!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
+<!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
+<!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
+<!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
+<!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
+<!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
                                         </div>
                                     </div>
                                 </div>
                                 <!--Start of Doctor Info-->
                                 <div class='card w-75 mb-4' id='doctor_information' style="height:300px; overflow-y:scroll;">
                                     <div class="btn-group">
+
                                         <button class="btn-primary">Edit</button>
                                         <button class="btn-primary">Save</button>
-                                        <button class="btn-warning">Delete</button>
+                                        <form id="delete_form">
+                                        <button id="delete_doctor_button" class="btn-warning" type="submit" onclick="delete_doctor()" disabled>Delete</button>
+                                        </form>
                                     </div>
 
                                     <!--Start of Doctor Profile-->
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <div class="well profile">
-                                                <h2 id="doctor_name">Nicole Pearson</h2>
-                                                <p><strong>About: </strong> Medicine </p>
-                                                <p id='doctor_introduction'><strong>Introduction: </strong> very good at prescribing medicinePrepare biographical material. Start by preparing a brief biographical sketch announcing your new arrival. ... Update your website. ... Share
-                                                    through social media. ... Update insurance company directories. ... Make introductions to practice staff.</p>
+                                            <div class="well profile" id="profile" hidden>
+                                                <h2 id="show_name"></h2>
+                                                <p><strong>About: </strong></p>
+                                                <p id="show_field">
+                                                </p>
+                                                <p><strong>Introduction: </strong> </p>
+                                                <p id="show_intro">
+                                                </p>
                                                 <figure>
                                                     <figcaption class="ratings">
                                                         <p>Ratings
@@ -773,6 +784,28 @@
     </div>
 </body>
 <script>
+    function delete_doctor(){
+        const doctor_id = document.getElementById("current_id").textContent;
+        console.log("id is:", doctor_id);
+        if (doctor_id != "init"){
+            $.ajax({
+                type: 'POST',
+                contentType:'application/json;charset-utf-08',
+                dateType: 'json',
+                url: "http://127.0.0.1:5000/admin/delete_doctor?id="+doctor_id,
+            });
+            return confirm("Are you sure?");
+        }
+    }
+
+    function view_profile(id, name, field, introduction, rate){
+        document.getElementById("current_id").textContent = id;
+        document.getElementById("show_name").textContent = name;
+        document.getElementById("show_field").textContent = field;
+        document.getElementById("show_intro").textContent = introduction;
+        document.getElementById("profile").hidden = false;
+        document.getElementById("delete_doctor_button").disabled = false;
+    }
     function enable_register(state){
         document.getElementById("register_doctor").hidden = !state;
         document.getElementById("register_doctor").disabled = !state;
