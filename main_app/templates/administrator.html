@@ -29,9 +29,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="./">
+                <a type="link" class="nav-link" onclick="back_to_main()">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Main</span></a>
             </li>
 
             <!-- Divider -->
@@ -50,8 +50,8 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item">Add doctors</a>
-                        <a class="collapse-item">Delete doctors</a>
+                        <a class="collapse-item" onclick="show_register()">Add doctors</a>
+                        <a class="collapse-item" onclick="edit_doctor()">Delete doctors</a>
                     </div>
                 </div>
             </li>
@@ -260,11 +260,11 @@
 
                 <div class="card mb-4">
                     <div class="container-fluid">
-                        <div class='card mb-3'>
+                        <div class='card mb-3' id="register_doctor" hidden>
                             <!--Start of Register Docotr-->
                             <div class="card-header py-2">
                                 <h6 class="m-0 font-weight-bold text-primary">Register Doctors</h6>
-                                <form class="user" method="post">
+                                <form action="{{ url_for('admin.add_doctor') }}" class="user" method="post">
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-1">
@@ -331,7 +331,7 @@
                         </div>
 
                         <!--Start of View Doctor-->
-                        <div class='card mb-3'>
+                        <div class='card mb-3' id="view_doctor" hidden>
                             <div class="card-header py-2 mb-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Doctor List</h6>
                             </div>
@@ -755,23 +755,48 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="./static/vendor/jquery/jquery.min.js"></script>
-        <script src="./static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="./static/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="./static/js/sb-admin-2.min.js"></script>
+        <script src="/static/js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="./static/vendor/chart.js/Chart.min.js"></script>
+        <script src="/static/vendor/chart.js/Chart.min.js"></script>
 
         <!-- Page level custom scripts -->
-        <script src="./static/js/demo/chart-area-demo.js"></script>
-        <script src="./static/js/demo/chart-pie-demo.js"></script>
+        <script src="/static/js/demo/chart-area-demo.js"></script>
+        <script src="/static/js/demo/chart-pie-demo.js"></script>
     </div>
 </body>
+<script>
+    function enable_register(state){
+        document.getElementById("register_doctor").hidden = !state;
+        document.getElementById("register_doctor").disabled = !state;
+    }
+
+    function enable_view(state){
+        document.getElementById("view_doctor").hidden = !state;
+        document.getElementById("view_doctor").disabled = !state;
+    }
+    function show_register() {
+        enable_register(true);
+        enable_view(false);
+    }
+
+    function edit_doctor() {
+        enable_register(false);
+        enable_view(true);
+    }
+
+    function back_to_main() {
+        enable_register(false);
+        enable_view(false);
+    }
+</script>
 {% endblock %}
 
 </html>

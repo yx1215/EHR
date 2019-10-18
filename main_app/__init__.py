@@ -36,4 +36,7 @@ def create_app(test_config=None):
     from . import admin
     app.register_blueprint(admin.admin_bp)
 
+    from . import patient
+    app.register_blueprint(patient.patient_bp)
+
     return app

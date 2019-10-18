@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 from main_app.authentication import login_required
 from main_app.database import get_db
 
-admin_bp = Blueprint('admin', __name__, url_prefix="")
+admin_bp = Blueprint('admin', __name__, url_prefix="/admin")
 
 
 def get_doctor(id):
@@ -22,10 +22,18 @@ def get_doctor(id):
 
 @admin_bp.route('/admin_page', methods=('GET', 'POST'))
 @login_required
-def register_doctor():
+def show_main():
+
+    return render_template('/administrator.html')
+
+
+@admin_bp.route('/add_doctor', methods=('GET', 'POST'))
+@login_required
+def add_doctor():
     if request.method == 'POST':
         db = get_db()
         error = None
+        print(request.form)
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
         password = request.form["password"]
@@ -33,7 +41,7 @@ def register_doctor():
         email = request.form["email"]
         phone_number = request.form["phone_number"]
         gender = request.form["gender"]
-        field = request.form['field']
+        field = request.form['doctor_field']
         introduction = request.form['introduction']
         date_of_birth = request.form['birthday']
         date_of_join = request.form['date_of_join']
@@ -69,7 +77,8 @@ def register_doctor():
                 (generate_password_hash(password), first_name, last_name, email, phone_number, gender, field, introduction, date_of_birth, date_of_join)
                 )
             db.commit()
-            return redirect(url_for('admin.register_doctor'))
+            flash("Successfully add a doctor.")
+            return render_template('/administrator.html')
 
         flash(error)
         # template not written

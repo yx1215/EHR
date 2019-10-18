@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/h3-py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/main_app.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/instance/main_app.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/authentication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/doctor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/templates/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/administrator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/doctor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/patient.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/patient.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,16 +53,23 @@
         <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
         <item name="administrators: table" type="3d80ac25:SqliteImplModel$Table" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="main_app" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="doctors: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -185,12 +198,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@4122c311" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@beb5e7e" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@4122c311" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@501c861e" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@beb5e7e" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@16d1b85" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -225,7 +238,9 @@
       <workItem from="1570798327781" duration="1994000" />
       <workItem from="1570957484781" duration="1145000" />
       <workItem from="1571068667036" duration="3461000" />
-      <workItem from="1571231003751" duration="4499000" />
+      <workItem from="1571231003751" duration="4835000" />
+      <workItem from="1571310018892" duration="496000" />
+      <workItem from="1571384790887" duration="7535000" />
     </task>
     <task id="LOCAL-00001" summary="change register.html">
       <created>1570293454733</created>
@@ -283,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571237126056</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="change">
+      <created>1571238857774</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1571238857774</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,9 +326,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change register.html" />
-    <MESSAGE value="change" />
     <MESSAGE value="Merge branch 'master' of https://github.com/yx1215/Software_engineering&#10;&#10;# Conflicts:&#10;#&#9;.coverage&#10;#&#9;tests/testdata.sql" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/yx1215/Software_engineering&#10;&#10;# Conflicts:&#10;#&#9;.coverage&#10;#&#9;tests/testdata.sql" />
+    <MESSAGE value="change" />
+    <option name="LAST_COMMIT_MESSAGE" value="change" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ERH$pytest_for_test_basic_test_hello.coverage" NAME="pytest for test_basic.test_hello Coverage Results" MODIFIED="1569692766783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
