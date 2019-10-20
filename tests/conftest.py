@@ -50,3 +50,8 @@ class AuthActions(object):
 @pytest.fixture
 def auth(client):
     return AuthActions(client)
+
+
+@pytest.fixture
+def runner(app):
+    return app.test_cli_runner()
