@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="Merge branch 'master' of https://github.com/yx1215/Software_engineering&#10;&#10;# Conflicts:&#10;#&#9;.coverage&#10;#&#9;tests/testdata.sql">
-      <change afterPath="$PROJECT_DIR$/main_app/patient.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/templates/patient.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/h3-py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/main_app.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/instance/main_app.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/authentication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/doctor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/administrator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/doctor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/testdata.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testdata.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/92e5a91c-a655-4588-8d04-3f7f9f324e8d.xml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,12 +30,12 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test_db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="150">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -62,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/conftest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="705">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -95,6 +79,12 @@
       </list>
     </option>
   </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="124" />
+    <option name="y" value="25" />
+    <option name="width" value="1280" />
+    <option name="height" value="716" />
+  </component>
   <component name="ProjectId" id="1RTRyZMX0gb26PCi8fHAHyqCxoc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -102,6 +92,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -128,7 +119,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -292,6 +282,7 @@
       <workItem from="1570957484781" duration="1145000" />
       <workItem from="1571068667036" duration="3461000" />
       <workItem from="1571231003751" duration="3240000" />
+      <workItem from="1571636640845" duration="1040000" />
     </task>
     <task id="LOCAL-00001" summary="change register.html">
       <created>1570293454733</created>
@@ -346,20 +337,15 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2130000" />
+    <option name="totallyTimeSpent" value="3170000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="124" y="25" width="1280" height="716" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2536349" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32876712" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -367,11 +353,17 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" weight="0.32956383" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32852563" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32956383" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,22 +482,22 @@
     <entry file="file://$PROJECT_DIR$/tests/test_doctor.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/conftest.py">
+    <entry file="file://$PROJECT_DIR$/tests/test_db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_db.py">
+    <entry file="file://$PROJECT_DIR$/tests/conftest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="705">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

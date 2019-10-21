@@ -9,7 +9,7 @@ from main_app.database import get_db
 
 
 SECRET_KEY = generate_password_hash('12345')
-auth_bp = Blueprint("auth", __name__, url_prefix="")
+auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 
 @auth_bp.route("/register", methods=('GET', 'POST'))
@@ -177,14 +177,14 @@ def load_logged_in_user():
 @auth_bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('authentication.login'))
+    return redirect(url_for('auth.login'))
 
 
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('authentication.login'))
+            return redirect(url_for('auth.login'))
 
         return view(**kwargs)
 

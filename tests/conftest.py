@@ -36,11 +36,16 @@ def client(app):
 class AuthActions(object):
     def __init__(self, client):
         self._client = client
-
-    def login(self, username='test', password='test'):
+    def login(self, first_name = 'a', last_name = 'a', password = 'a', email='123@nyu.edu', phone_number='1234', gender='male'):
         return self._client.post(
             '/auth/login',
-            data={'username': username, 'password': password}
+            data={'first_name':first_name,
+    'last_name':last_name,
+    'password':password,
+    'email':email,
+    'phone_number':phone_number,
+    'gender':gender
+}
         )
 
     def logout(self):

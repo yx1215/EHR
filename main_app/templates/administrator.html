@@ -788,13 +788,14 @@
         const doctor_id = document.getElementById("current_id").textContent;
         console.log("id is:", doctor_id);
         if (doctor_id != "init"){
-            $.ajax({
+            if (confirm("Are you sure?")){
+                $.ajax({
                 type: 'POST',
                 contentType:'application/json;charset-utf-08',
                 dateType: 'json',
                 url: "http://127.0.0.1:5000/admin/delete_doctor?id="+doctor_id,
             });
-            return confirm("Are you sure?");
+            }
         }
     }
 

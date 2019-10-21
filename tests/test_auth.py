@@ -8,7 +8,7 @@ def test_register(client, app):
     response = client.post(
         '/auth/register', data={'first_name': 'a', 'last_name': 'a', 'password':'a','email':'123@nyu.edu','phone_number':'1234','gender': 'male'}
     )
-    assert 'http://localhost/auth/login' == response.headers['Location']
+    assert 'http://localhost/auth/login' in response.headers.values()
 
     with app.app_context():
         assert get_db().execute(
@@ -52,27 +52,13 @@ def test_login(client, auth):
 
 
 @pytest.mark.parametrize(('first_name', 'last_name','password', 'email','phone_number','gender','message'), (
-    ('', 'a', 'a','123@nyu.edu','1234','male',b'first_name is required.'),
-    ('a', '', 'a','123@nyu.edu','1234','male',b'last_name is required.'),
-    ('a', 'a', '','123@nyu.edu','1234','male',b'password is required.'),
-    ('a', 'a', 'a','','1234','male',b'email is required.'),
-    ('a', 'a', 'a','123@nyu.edu','','male',b'phone_number is required.'),
-    ('a', 'a', 'a','123@nyu.edu','1234','',b'gender is required.'),
-    ('test', 'test', 'test', 'test', 'test', 'test', b'already registered')
+    ('b', 'a', 'a','123@nyu.edu','1234','male',b'Incorrect username.'),
+    ('a', 'a', 'b','123@nyu.edu','1234','male',b'Incorrect password.')
 ))
 
 
 def test_login_validate_input(auth, first_name, last_name, password, email, phone_number, gender, message):
-    response = auth.login(
-        '/auth/register',
-        data={'first_name':first_name,
-    'last_name':last_name,
-    'password':password,
-    'email':email,
-    'phone_number':phone_number,
-    'gender':gender
-        }
-    )
+    response = auth.login(first_name, last_name, password, email, phone_number, gender)
     assert message in response.data
 
 
