@@ -1,6 +1,5 @@
 import pytest
-import sys
-import os
+
 
 from main_app.database import get_db
 
@@ -24,14 +23,14 @@ def test_index(client, auth):
 ))
 def test_login_required(client, path):
     response = client.post(path)
-    assert response.headers['Location'] == 'http://localhost/auth/login'
+    assert response.headers['Location'] == 'http://localhost/login'
 
 
 def test_author_required(app, client, auth):
     # change the post author to another user
     with app.app_context():
         db = get_db()
-        db.execute('UPDATE post SET author_id = 2 WHERE id = 1')
+        db.execute('UPDATE administrators SET last_name="A" WHERE id = 1')
         db.commit()
 
     auth.login()
@@ -50,36 +49,36 @@ def test_exists_required(client, auth, path):
     auth.login()
     assert client.post(path).status_code == 404
 
-def test_create(client, auth, app):
-    auth.login()
-    assert client.get('/create').status_code == 200
-    client.post('/create', data={'title': 'created', 'body': ''})
+# def test_create(client, auth, app):
+#     auth.login()
+#     assert client.get('/create').status_code == 200
+#     client.post('/create', data={'title': 'created', 'body': ''})
 
-    with app.app_context():
-        db = get_db()
-        count = db.execute('SELECT COUNT(id) FROM post').fetchone()[0]
-        assert count == 2
-
-
-def test_update(client, auth, app):
-    auth.login()
-    assert client.get('/1/update').status_code == 200
-    client.post('/1/update', data={'title': 'updated', 'body': ''})
-
-    with app.app_context():
-        db = get_db()
-        post = db.execute('SELECT * FROM post WHERE id = 1').fetchone()
-        assert post['title'] == 'updated'
+#     with app.app_context():
+#         db = get_db()
+#         count = db.execute('SELECT COUNT(id) FROM post').fetchone()[0]
+#         assert count == 2
 
 
-@pytest.mark.parametrize('path', (
-    '/create',
-    '/1/update',
-))
-def test_create_update_validate(client, auth, path):
-    auth.login()
-    response = client.post(path, data={'title': '', 'body': ''})
-    assert b'Title is required.' in response.data
+# def test_update(client, auth, app):
+#     auth.login()
+#     assert client.get('/1/update').status_code == 200
+#     client.post('/1/update', data={'title': 'updated', 'body': ''})
+
+#     with app.app_context():
+#         db = get_db()
+#         post = db.execute('SELECT * FROM post WHERE id = 1').fetchone()
+#         assert post['title'] == 'updated'
+
+
+# @pytest.mark.parametrize('path', (
+#     '/create',
+#     '/1/update',
+# ))
+# def test_create_update_validate(client, auth, path):
+#     auth.login()
+#     response = client.post(path, data={'title': '', 'body': ''})
+#     assert b'Title is required.' in response.data
 
 def test_delete(client, auth, app):
     auth.login()

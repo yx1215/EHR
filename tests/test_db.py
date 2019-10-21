@@ -1,7 +1,7 @@
 import sqlite3
 
 import pytest
-from flaskr.db import get_db
+from main_app.database import get_db
 
 
 def test_get_close_db(app):
@@ -14,6 +14,7 @@ def test_get_close_db(app):
 
     assert 'closed' in str(e.value)
 
+
 def test_init_db_command(runner, monkeypatch):
     class Recorder(object):
         called = False
@@ -21,7 +22,7 @@ def test_init_db_command(runner, monkeypatch):
     def fake_init_db():
         Recorder.called = True
 
-    monkeypatch.setattr('flaskr.db.init_db', fake_init_db)
+    monkeypatch.setattr('main_app.database.init_db', fake_init_db)
     result = runner.invoke(args=['init-db'])
     assert 'Initialized' in result.output
     assert Recorder.called

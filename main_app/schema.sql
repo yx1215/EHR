@@ -44,7 +44,7 @@ CREATE TABLE administrators (
     password TEXT NOT NULL,
     email TEXT NOT NULL,
     phone_number TEXT NOT NULL,
-    gender TEXT CHECK ( gender='male' or gender='female' ) NOT NULL
+    gender TEXT CHECK (gender='male' or gender='female' ) NOT NULL
 );
 
 CREATE TABLE take_care (

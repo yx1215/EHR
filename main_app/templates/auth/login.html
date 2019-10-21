@@ -11,7 +11,7 @@
 <!--    <meta name="description" content="">-->
 <!--    <meta name="author" content="">-->
 
-    <title>SB Admin 2 - Login</title>
+    <title>EHR Login</title>
 
 <!--    &lt;!&ndash; Custom fonts for this template&ndash;&gt;-->
 <!--    <link href="./static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
@@ -74,7 +74,7 @@
                                         <a class="small" href="/forgot-password">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="/register">Create an Account!</a>
+                                        <a class="small" href="{{ url_for('auth.register')}}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>

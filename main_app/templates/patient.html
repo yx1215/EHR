@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <head>
 
-    <title>EHR Admin - Dashboard</title>
+    <title>EHR Patient - Dashboard</title>
 
 </head>
 
@@ -66,7 +65,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Make a appointment</a>
+                        <a class="collapse-item" href="utilities-color.html">Make an appointment</a>
                         <a class="collapse-item" href="utilities-border.html">Make a payment</a>
                     </div>
                 </div>
@@ -230,7 +229,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{g.user['last_name']}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{g.user['first_name']}}</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -266,9 +265,9 @@
                                     <div class="card-body">
                                         <div class="card-title mb-4">
                                             <div class="d-flex justify-content-start">
-                                                <div class="userData ml-3">
-                                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Your Information</h2>
-                                                    <h6 class="d-block">Registered Email: <a href="javascript:void(0)">email@email.com</a></h6>
+                                                <div class="userData">
+                                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Hello, {{g.user['first_name']}}!</h2>
+                                                    <h6 class="d-block">Registered Email: <a href="javascript:void(0)">{{g.user['email']}}</a></h6>
                                                 </div>
                                                 <div class="ml-auto">
                                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
@@ -295,7 +294,7 @@
                                                                 <label style="font-weight:bold;">First Name</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                firstname
+                                                                {{g.user['first_name']}}
                                                             </div>
                                                         </div>
                                                         <hr/>
@@ -305,7 +304,7 @@
                                                                 <label style="font-weight:bold;">Last Name</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                lastname
+                                                                {{g.user['last_name']}}
                                                             </div>
                                                         </div>
                                                         <hr/>
@@ -315,7 +314,7 @@
                                                                 <label style="font-weight:bold;">Birth Date</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                March 22, 1994.
+                                                                {{g.user['data_of_birth']}}
                                                             </div>
                                                         </div>
                                                         <hr />
@@ -326,7 +325,7 @@
                                                                 <label style="font-weight:bold;">Gender</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                Something
+                                                                {{g.user['gender']}}
                                                             </div>
                                                         </div>
                                                         <hr />
@@ -335,16 +334,16 @@
                                                                 <label style="font-weight:bold;">Weight</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                9999
+                                                                {{g.user['weight']}}
                                                             </div>
                                                         </div>
                                                         <hr />
                                                         <div class="row">
                                                             <div class="col-sm-3 col-md-2 col-5">
-                                                                <label style="font-weight:bold;">Weight</label>
+                                                                <label style="font-weight:bold;">Height</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                9999
+                                                                {{g.user['height']}}
                                                             </div>
                                                         </div>
                                                         <hr />
@@ -354,7 +353,7 @@
                                                                 <label style="font-weight:bold;">Emergency Contact</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                Something
+                                                                {{g.user['emergency_contacts']}}
                                                             </div>
                                                         </div>
                                                         <hr />
@@ -451,6 +450,80 @@
                     </div>
                     <!--End of Patient Information-->
 
+
+                    <!--My Current Providers-->
+                    <hr/>
+                    <div class="container">
+                        <div class="card col-md-12">
+                            <br>
+                            <div class="userData">
+                                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Make An Appointment with Your Current Provider </h2>
+                                <h6 class="d-block">Select your date for a quick appointment</h6>
+                                </br>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <input type='date' class="form-control" id='appointment_date'>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <select id="ilceler" class="form-control">
+                                                            <option selected>Appointemnt Duration</option>
+                                                            <option>30 minute</option>
+                                                            <option>60 mintue</option>
+                                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <select id="arac-turu" class="form-control">
+                                                            <option selected>Appointment Type</option>
+                                                            <option>Diagnosis</option>
+                                                            <option>Treatment</option>
+                                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group ">
+                                        <input type="text" class="form-control" placeholder="What you wanna tell your doctor before appointment">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <button type="button" class="btn btn-primary  pl-5 pr-5">Send Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">My Provider Information</h2>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6 img mb-3">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q" alt="" class="img-rounded">
+                                </div>
+                                <div class="col-md-6 details">
+                                    <blockquote>
+                                        <h5>Fiona Gallagher</h5>
+                                        <small><cite title="Source Title">4.5/5.0, 5000 patients rated<i class="icon-map-marker"></i></cite></small>
+                                    </blockquote>
+                                    <p>
+                                        Gender Surgery Doctor <br> long ass introduction here long ass introduction here long ass introduction herelong ass introduction long ass introduction here long ass introduction here long ass introduction herelong
+                                        ass introduction here
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <!--End of My Current Providers-->
+
+
                     <!--Start of Appointment Interface-->
                     <div class="container-fluid">
                         <div class="row text-center pb-4">
@@ -459,9 +532,9 @@
                             <div class="col-md-12">
                                 <div class="card acik-renk-form">
                                     <div class="card-body">
-                                        <div class="userData ml-3">
-                                            <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Make Appointment</h2>
-                                            <h6 class="d-block">Select your date for a quick appointment</h6>
+                                        <div class="userData">
+                                            <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Find Your Professional Provider</h2>
+                                            <h6 class="d-block">Select your date for a quick first meet</h6>
                                             </br>
                                         </div>
                                         <div class="row">
@@ -492,7 +565,7 @@
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <div class="form-group ">
-                                                    <input type="text" class="form-control" placeholder="Appoint professional care with your touch">
+                                                    <input type="text" class="form-control" placeholder="Already Have a Provider">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -562,7 +635,7 @@
                         <br>
                         <div class="container-fluid">
                             <div class="card">
-                                <div class="card-body p-5">
+                                <div class="card-body">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Your Information</h2>
                                     <br>
                                     <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
