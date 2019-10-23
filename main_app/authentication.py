@@ -141,11 +141,11 @@ def login():
             session['user_id'] = user['id']
             session['login_type'] = login_type
             if login_type == 'admin':
-                return redirect(url_for('admin.show_main'))
+                return redirect(url_for('admin.show_main', id=user['id']))
             elif login_type == 'patient':
                 return redirect(url_for('patient.show_main', id=user['id']))
             else:
-                return redirect(url_for('doctor.show_main'))
+                return redirect(url_for('doctor.show_main', id=user['id']))
 
         flash(error)
 

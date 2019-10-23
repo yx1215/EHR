@@ -6,7 +6,6 @@ from werkzeug.security import generate_password_hash
 
 from main_app.authentication import login_required
 from main_app.database import get_db
-import json
 
 
 admin_bp = Blueprint('admin', __name__, url_prefix="/admin")
@@ -41,7 +40,6 @@ def add_doctor():
     if request.method == 'POST':
         db = get_db()
         error = None
-        print(request.form)
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
         password = request.form["password"]

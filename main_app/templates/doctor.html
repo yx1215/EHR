@@ -21,7 +21,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"> EHR Admin</div>
+                <div class="sidebar-brand-text mx-3"> EHR Doctor</div>
             </a>
 
             <!-- Divider -->
@@ -286,8 +286,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{g.user['last_name']}}</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -316,97 +315,47 @@
                 <div class="container-fluid">
 
                     <!--Start of Viewing Pending Patient-->
-                    <div class='card mb-3' id="view_doctor">
+                    <div class='card mb-3' id="pending_patient">
                         <div class="card-header py-2 mb-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Pending Patient List</h6>
                         </div>
-                        <!-- Start of Doctor List Search-->
-                        <form class="navbar-search mb-4">
-                            <div class="input-group col-8 ">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                </div>
-                            </div>
-                        </form>
-                        <!--End of Doctor List Search-->
 
                         <div class="card-group" style="height:300px">
 
                             <div class='card col-2 mb-4'>
-                                <div id="" style="height:300px; overflow-y:scroll;">
-                                    <div id="doctor_list" class="list-group">
-                                        {% for doctor in all_doctors %}
-                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}')">
-                                                {{doctor["last_name"] + " " + doctor["first_name"]}}
-                                            </a> {% endfor %}
-                                        <strong id="current_id" hidden>init</strong>
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
+                                <div style="height:300px; overflow-y:scroll;">
+                                    <div id="pending_list" class="list-group">
+                                        {% for p in pending %}
+                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_appointment('{{ p[ 'id' ]}}', '{{ p[ 'last_name' ]}}' + ' ' + '{{ p[ 'first_name' ]}}', '{{ p[ 'start_time' ]}}', '{{ p[ 'duration' ]}}', '{{ p[ 'location' ]}}')">
+                                                {{p["last_name"] + " " + p["first_name"]}}
+                                        </a>
+                                        {% endfor %}
+                                        <strong id="current_patient_id_pending" hidden>init</strong>
                                     </div>
                                 </div>
                             </div>
                             <!--Start of Doctor Info-->
-                            <div class='card mb-4' id='doctor_information' style="height:300px; overflow-y:scroll;">
+                            <div class='card mb-4' id='appointment-info' style="height:300px; overflow-y:scroll;">
                                 <div class="btn-group">
-                                    <form id="delete_form">
-                                        <button id="delete_doctor_button" class="btn-warning" type="submit" onclick="delete_doctor()" disabled>Accept as New Patient</button>
+                                    <form>
+                                        <button id="accept" class="btn-warning" type="submit" onclick="accept_appointment()" disabled>Accept as New Patient</button>
                                     </form>
                                 </div>
 
                                 <!--Start of Doctor Profile-->
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="well profile" id="profile" hidden>
-                                            <h2 id="show_name"></h2>
-                                            <p><strong>About: </strong></p>
-                                            <p id="show_field">
+                                        <div class="well profile" id="appointment-profile" hidden>
+                                            <h2 id="patient_pending"></h2>
+                                            <p><strong>Start From: </strong></p>
+                                            <p id="start_time_pending">
                                             </p>
-                                            <p><strong>Introduction: </strong> </p>
-                                            <p id="show_intro">
+                                            <p><strong>Duration: </strong> </p>
+                                            <p id="duration_pending">
                                             </p>
-                                            <figure>
-                                                <figcaption class="ratings">
-                                                    <p>Ratings
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star-o"></span>
-                                                        </a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="divider text-center">
-                                                <div class="row">
-                                                    <div class="btn-group dropup btn-block col-xs col-sm-2">
-                                                        <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Contact our Doctor </button>
-                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="caret"></span>
-                                                            <span class="sr-only">Toggle Dropdown</span>
-                                                          </button>
-                                                        <ul class="dropdown-menu text-left" role="menu">
-                                                            <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
-                                                            <li><a href="#"><span class="fa fa-envelope pull-right"></span> Make a Phone Call </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <p><strong>Location: </strong> </p>
+                                            <p id="location_pending">
+                                            </p>
                                         </div>
 
                                     </div>
@@ -426,17 +375,9 @@
                         <div class="card-header py-2 mb-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Current Patient List</h6>
                         </div>
+
                         <!-- Start of Doctor List Search-->
-                        <form class="navbar-search mb-4">
-                            <div class="input-group col-8 ">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                </div>
-                            </div>
-                        </form>
+
                         <!--End of Doctor List Search-->
 
                         <div class="card-group" style="height:300px">
@@ -444,17 +385,12 @@
                             <div class='card col-2 mb-4'>
                                 <div id="" style="height:300px; overflow-y:scroll;">
                                     <div id="doctor_list" class="list-group">
-                                        {% for doctor in all_doctors %}
-                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}')">
-                                            {{doctor["last_name"] + " " + doctor["first_name"]}}
+                                        {% for a_p in accept %}
+                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_accepted_appointment('{{ a_p[ 'id' ]}}', '{{ a_p[ 'last_name' ]}}' + ' ' + '{{ a_p[ 'first_name' ]}}', '{{ a_p[ 'start_time' ]}}', '{{ a_p[ 'duration' ]}}', '{{ a_p[ 'location' ]}}')">
+                                            {{a_p["last_name"] + " " + a_p["first_name"]}}
                                         </a> {% endfor %}
-                                        <strong id="current_id" hidden>init</strong>
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
-                                        <!--                                            <a class="list-group-item list-group-item-action" href="#list-item-2"> Doctor_2</a>-->
+                                        <strong id="current_patient_id_accepted" hidden>init</strong>
+
                                     </div>
                                 </div>
                             </div>
@@ -471,50 +407,17 @@
                                 <!--Start of Doctor Profile-->
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="well profile" id="profile" hidden>
-                                            <h2 id="show_name"></h2>
-                                            <p><strong>About: </strong></p>
-                                            <p id="show_field">
+                                        <div class="well profile" id="appointment-profile_accepted" hidden>
+                                            <h2 id="patient_accepted"></h2>
+                                            <p><strong>Start From: </strong></p>
+                                            <p id="start_time_accepted">
                                             </p>
-                                            <p><strong>Introduction: </strong> </p>
-                                            <p id="show_intro">
+                                            <p><strong>Duration: </strong> </p>
+                                            <p id="duration_accepted">
                                             </p>
-                                            <figure>
-                                                <figcaption class="ratings">
-                                                    <p>Ratings
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star"></span>
-                                                        </a>
-                                                        <a href="#">
-                                                            <span class="fa fa-star-o"></span>
-                                                        </a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="divider text-center">
-                                                <div class="row">
-                                                    <div class="btn-group dropup btn-block col-xs col-sm-2">
-                                                        <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Contact our Doctor </button>
-                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                        <span class="caret"></span>
-                                                        <span class="sr-only">Toggle Dropdown</span>
-                                                      </button>
-                                                        <ul class="dropdown-menu text-left" role="menu">
-                                                            <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
-                                                            <li><a href="#"><span class="fa fa-envelope pull-right"></span> Make a Phone Call </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <p><strong>Location: </strong> </p>
+                                            <p id="location_accepted">
+                                            </p>
                                         </div>
 
                                     </div>
@@ -525,7 +428,7 @@
                             </div>
 
                             <!--Start of Input Box-->
-                            <div class='card col-6 mb-4' id='doctor_information'>
+                            <div class='card col-6 mb-4' id='doctor_information2'>
                                 <textarea style="height:230px; overflow-y:scroll;">
                                 </textarea>
                                 <button class="btn-primary">Prescribe</button>
@@ -603,6 +506,47 @@
     <script src="/static/js/demo/chart-pie-demo.js"></script>
 
 </body>
+<script>
+    function view_appointment(patient_id, patient_name, start_time, duration, location) {
+        document.getElementById("current_patient_id_pending").textContent = patient_id;
+        document.getElementById("patient_pending").textContent = patient_name;
+        document.getElementById("start_time_pending").textContent = start_time;
+        document.getElementById("duration_pending").textContent = duration + ' minutes';
+        document.getElementById("location_pending").textContent = location;
+        document.getElementById("appointment-profile").hidden = false;
+        document.getElementById("accept").disabled = false;
+    }
+
+    function view_accepted_appointment(patient_id, patient_name, start_time, duration, location) {
+        document.getElementById("current_patient_id_accepted").textContent = patient_id;
+        document.getElementById("patient_accepted").textContent = patient_name;
+        document.getElementById("start_time_accepted").textContent = start_time;
+        document.getElementById("duration_accepted").textContent = duration + ' minutes';
+        document.getElementById("location_accepted").textContent = location;
+        document.getElementById("appointment-profile_accepted").hidden = false;
+    }
+
+    function accept_appointment() {
+        const patient_id = document.getElementById("current_patient_id_pending").textContent;
+        const start_time = document.getElementById("start_time_pending").textContent;
+
+        console.log("start_time:", start_time);
+
+
+        if (patient_id != "init"){
+            if (confirm("Are you sure?")){
+                $.ajax({
+                type: 'POST',
+                contentType:'application/json;charset-utf-08',
+                dateType: 'json',
+                url: "http://127.0.0.1:5000/doctor/accept_appointment?patient_id="+patient_id
+                    + '&doctor_id='+ {{ doctor_id }}
+                    + '&start_time='+ start_time
+            });
+            }
+        }
+    }
+</script>
 {% endblock %}
 
 </html>

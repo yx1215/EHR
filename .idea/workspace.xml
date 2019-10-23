@@ -2,10 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ERH.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ERH.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/main_app.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/instance/main_app.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/main_app.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/authentication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/doctor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/patient.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/patient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/templates/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/administrator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/doctor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/patient.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/patient.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_admin.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +66,14 @@
         <item name="main_app" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
-        <item name="doctors: table" type="3d80ac25:SqliteImplModel$Table" />
+        <item name="appointment: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="main_app" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="schedule: table" type="3d80ac25:SqliteImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -101,7 +122,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.admin">
+  <component name="RunManager" selected="Python tests.pytest for test_factory.test_config">
     <configuration name="base.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ERH/main_app/templates/base.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -131,9 +152,9 @@
       <module name="ERH" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -177,11 +198,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest for test_factory.test_config" />
+        <item itemvalue="Python tests.pytest for test_basic.test_hello" />
         <item itemvalue="Python.admin" />
         <item itemvalue="JavaScript Debug.base.html" />
         <item itemvalue="Python tests.pytest for test_factory.test_hello" />
-        <item itemvalue="Python tests.pytest for test_factory.test_config" />
-        <item itemvalue="Python tests.pytest for test_basic.test_hello" />
       </list>
     </recent_temporary>
   </component>
@@ -192,12 +213,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@beb5e7e" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@812defb1" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@beb5e7e" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@6c16043a" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@812defb1" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@644fb626" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -334,9 +355,9 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ERH$pytest_for_test_basic_test_hello.coverage" NAME="pytest for test_basic.test_hello Coverage Results" MODIFIED="1569692766783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/ERH$pytest_for_test_basic_test_config.coverage" NAME="pytest for test_basic.test_config Coverage Results" MODIFIED="1569692600952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/ERH$pytest_for_test_factory_test_config.coverage" NAME="pytest for test_factory.test_config Coverage Results" MODIFIED="1569693316141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/ERH$pytest_for_test_factory_test_hello.coverage" NAME="pytest for test_factory.test_hello Coverage Results" MODIFIED="1569693757787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/ERH$admin.coverage" NAME="admin Coverage Results" MODIFIED="1571405600224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main_app" />
+    <SUITE FILE_PATH="coverage/ERH$pytest_for_test_factory_test_config.coverage" NAME="pytest for test_factory.test_config Coverage Results" MODIFIED="1571684416058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/ERH$testconf.coverage" NAME="testconf Coverage Results" MODIFIED="1569692736024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

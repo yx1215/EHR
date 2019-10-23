@@ -33,9 +33,11 @@ def app():
 def client(app):
     return app.test_client()
 
+
 class AuthActions(object):
     def __init__(self, client):
         self._client = client
+
     def login(self, first_name = 'a', last_name = 'a', password = 'a', email='123@nyu.edu', phone_number='1234', gender='male'):
         return self._client.post(
             '/auth/login',

@@ -29,9 +29,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="./">
+                <a class="nav-link">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Main</span></a>
             </li>
 
             <!-- Divider -->
@@ -50,8 +50,8 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item">Basic Information</a>
-                        <a class="collapse-item">Medical History</a>
+                        <a class="collapse-item" onclick="show_patient_info()">Basic Information</a>
+                        <a class="collapse-item" onclick="show_provider()">Your provider</a>
                     </div>
                 </div>
             </li>
@@ -257,7 +257,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!--Start of Patient Information-->
-                    <div class="container">
+                    <div class="container" id="patient-info">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -453,7 +453,7 @@
 
                     <!--My Current Providers-->
                     <hr/>
-                    <div class="container">
+                    <div class="container" id="current-provider">
                         <div class="card col-md-12">
                             <br>
                             <div class="userData">
@@ -464,25 +464,25 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group ">
-                                        <input type='date' class="form-control" id='appointment_date'>
+                                        <input type='datetime-local' class="form-control" id='appointment_date_current' required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group ">
-                                        <select id="ilceler" class="form-control">
-                                                            <option selected>Appointemnt Duration</option>
-                                                            <option>30 minute</option>
-                                                            <option>60 mintue</option>
-                                                        </select>
+                                        <select id="duration_current" class="form-control">
+                                            <option value="None" selected>Appointemnt Duration</option>
+                                            <option value="30">30 minute</option>
+                                            <option value="60">60 mintue</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group ">
-                                        <select id="arac-turu" class="form-control">
-                                                            <option selected>Appointment Type</option>
-                                                            <option>Diagnosis</option>
-                                                            <option>Treatment</option>
-                                                        </select>
+                                        <select id="arac-turu1" class="form-control">
+                                            <option selected>Appointment Type</option>
+                                            <option>Diagnosis</option>
+                                            <option>Treatment</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -530,31 +530,30 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card acik-renk-form">
+                                <div class="card acik-renk-form" id="new-provider">
                                     <div class="card-body">
                                         <div class="userData">
                                             <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Find Your Professional Provider</h2>
                                             <h6 class="d-block">Select your date for a quick first meet</h6>
-                                            </br>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group ">
-                                                    <input type='date' class="form-control" id='appointment_date'>
+                                                    <input type='datetime-local' class="form-control" id='appointment_date_new' required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group ">
-                                                    <select id="ilceler" class="form-control">
-                                                                <option selected>Appointemnt Duration</option>
-                                                                <option>30 minute</option>
-                                                                <option>60 mintue</option>
-                                                            </select>
+                                                    <select id="duration_new" class="form-control">
+                                                        <option value="None" selected>Appointment Duration</option>
+                                                        <option value="30">30 minutes</option>
+                                                        <option value="60">60 minutes</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group ">
-                                                    <select id="arac-turu" class="form-control">
+                                                    <select id="arac-turu2" class="form-control">
                                                                 <option selected>Doctor Field</option>
                                                                 <option>Medicine</option>
                                                                 <option>Surgery</option>
@@ -564,8 +563,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <div class="form-group ">
-                                                    <input type="text" class="form-control" placeholder="Already Have a Provider">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Input doctor name...">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -573,57 +572,111 @@
                                             </div>
                                         </div>
                                     </div>
+                                        <!--start of doctor list-->
+                                    <div class="card-group" style="height:300px">
 
-
-
-
-                                    <!--Start of Recommended Doctor Profiles-->
-                                    <hr/>
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6 img mb-3">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q" alt="" class="img-rounded">
-                                            </div>
-                                            <div class="col-md-6 details">
-                                                <blockquote>
-                                                    <h5>Fiona Gallagher</h5>
-                                                    <small><cite title="Source Title">4.5/5.0, 5000 patients rated<i class="icon-map-marker"></i></cite></small>
-                                                </blockquote>
-                                                <p>
-                                                    Gender Surgery Doctor <br> long ass introduction here long ass introduction here long ass introduction herelong ass introduction long ass introduction here long ass introduction here long ass introduction
-                                                    herelong ass introduction here
-                                                </p>
-                                            </div>
-                                            <div class="container-fluid mb-4">
-                                                <button type="button" class="btn btn-primary  pl-5 pr-5"> Make a Appointment!</button>
-                                            </div>
+                                <div class='card col-2 mb-4'>
+                                    <div id="" style="height:300px; overflow-y:scroll;">
+                                        <div id="doctor_list" class="list-group">
+                                            {% for doctor in all_doctors %}
+                                            <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}')">
+                                                {{doctor["last_name"] + " " + doctor["first_name"]}}
+                                            </a>
+                                            {% endfor %}
+                                            <strong id="current_id" hidden>init</strong>
                                         </div>
                                     </div>
-                                    <!--End of Recommended Doctor Profiles-->
+                                </div>
+                                <!--Start of Doctor Info-->
+                                <div class='card w-75 mb-4' id='doctor_information' style="height:300px; overflow-y:scroll;">
+                                    <div class="btn-group">
 
-                                    <!--Start of Recommended Doctor Profiles-->
-                                    <hr/>
-                                    <div class="container">
+                                        <button class="btn-primary" id="make-appointment-button" onclick="make_appointment_new()" disabled>Make an appointment</button>
+
+                                    </div>
+
+                                    <!--Start of Doctor Profile-->
+                                    <div class="container-fluid">
                                         <div class="row">
-                                            <div class="col-md-6 img mb-3">
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q" alt="" class="img-rounded">
-                                            </div>
-                                            <div class="col-md-6 details">
-                                                <blockquote>
-                                                    <h5>Fiona Gallagher</h5>
-                                                    <small><cite title="Source Title">4.5/5.0, 5000 patients rated<i class="icon-map-marker"></i></cite></small>
-                                                </blockquote>
-                                                <p>
-                                                    Gender Surgery Doctor <br> long ass introduction here long ass introduction here long ass introduction herelong ass introduction long ass introduction here long ass introduction here long ass introduction
-                                                    herelong ass introduction here
+                                            <div class="well profile" id="profile" hidden>
+                                                <h2 id="show_name"></h2>
+                                                <p><strong>About: </strong></p>
+                                                <p id="show_field">
                                                 </p>
+                                                <p><strong>Introduction: </strong> </p>
+                                                <p id="show_intro">
+                                                </p>
+                                                <div class="divider text-center">
+                                                    <div class="row">
+                                                        <div class="btn-group dropup btn-block col-xs col-sm-2">
+                                                            <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Contact our Doctor </button>
+                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                          </button>
+                                                            <ul class="dropdown-menu text-left" role="menu">
+                                                                <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
+                                                                <li><a href="#"><span class="fa fa-envelope pull-right"></span> Make a Phone Call </a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="container-fluid mb-4">
-                                                <button type="button" class="btn btn-primary  pl-5 pr-5"> Make a Appointment!</button>
-                                            </div>
+
                                         </div>
                                     </div>
-                                    <!--End of Recommended Doctor Profiles-->
+                                    <!--End of Doctor Profile-->
+
+                                </div>
+                                <!--End of Doctor Info-->
+                            </div>
+
+
+
+<!--                                    &lt;!&ndash;Start of Recommended Doctor Profiles&ndash;&gt;-->
+<!--                                    <hr/>-->
+<!--                                    <div class="container">-->
+<!--                                        <div class="row">-->
+<!--&lt;!&ndash;                                            <div class="col-md-6 img mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q" alt="" class="img-rounded">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--                                            <div class="col-md-6 details">-->
+<!--                                                <blockquote>-->
+<!--                                                    <h5>Fiona Gallagher</h5>-->
+<!--                                                    <small><cite title="Source Title">4.5/5.0<i class="icon-map-marker"></i></cite></small>-->
+<!--                                                </blockquote>-->
+<!--                                                <p>-->
+<!--                                                    Gender Surgery Doctor <br> long ass introduction here long ass introduction here long ass introduction herelong ass introduction long ass introduction here long ass introduction here long ass introduction-->
+<!--                                                    herelong ass introduction here-->
+<!--                                                </p>-->
+<!--                                            </div>-->
+<!--                                            <div class="container-fluid mb-4">-->
+<!--                                                <button type="button" class="btn btn-primary  pl-5 pr-5"> Make a Appointment!</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <hr/>-->
+<!--                                    <div class="container">-->
+<!--                                        <div class="row">-->
+<!--&lt;!&ndash;                                            <div class="col-md-6 img mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q" alt="" class="img-rounded">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--                                            <div class="col-md-6 details">-->
+<!--                                                <blockquote>-->
+<!--                                                    <h5>Fiona Gallagher</h5>-->
+<!--                                                    <small><cite title="Source Title">4.5/5.0, 5000 patients rated<i class="icon-map-marker"></i></cite></small>-->
+<!--                                                </blockquote>-->
+<!--                                                <p>-->
+<!--                                                    Gender Surgery Doctor <br> long ass introduction here long ass introduction here long ass introduction herelong ass introduction long ass introduction here long ass introduction here long ass introduction-->
+<!--                                                    herelong ass introduction here-->
+<!--                                                </p>-->
+<!--                                            </div>-->
+<!--                                            <div class="container-fluid mb-4">-->
+<!--                                                <button type="button" class="btn btn-primary  pl-5 pr-5"> Make a Appointment!</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash;End of Recommended Doctor Profiles&ndash;&gt;-->
                                 </div>
                             </div>
                         </div>
@@ -633,7 +686,7 @@
                         <br>
                         <hr/>
                         <br>
-                        <div class="container-fluid">
+                        <div class="container-fluid" id="payment-info" hidden>
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Your Information</h2>
@@ -659,18 +712,18 @@
                                             <form role="form">
                                                 <div class="form-group">
                                                     <label for="username">Full name (on the card)</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="" required="">
+                                                    <input type="text" class="form-control" id="username" placeholder="" required="">
                                                 </div>
                                                 <!-- form-group.// -->
 
                                                 <div class="form-group">
                                                     <label for="cardNumber">Card number</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="cardNumber" placeholder="">
+                                                        <input type="text" class="form-control" id="cardNumber" placeholder="">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text text-muted">
-                                                    <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>   
-                                                    <i class="fab fa-cc-mastercard"></i> 
+                                                    <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>  
+                                                    <i class="fab fa-cc-mastercard"></i>
                                                 </span>
                                                         </div>
                                                     </div>
@@ -733,15 +786,11 @@
                             <!-- card.// -->
 
 
-                            </aside>
-                            <!-- col.// -->
-
-
                         </div>
                         <!--container end.//-->
-
                         <br>
                         <!--End of Payment Interface-->
+                    </div>
 
 
                     </div>
@@ -1089,6 +1138,73 @@
     <script src="/static/js/demo/chart-pie-demo.js"></script>
     </div>
 </body>
-{% endblock %}
+<!--id="patient-info"-->
+<!--id="current-provider"-->
+<!--id="new-provider"-->
+<script type="text/javascript">
+    function view_profile(id, name, field, introduction, rate){
+        document.getElementById("current_id").textContent = id;
+        document.getElementById("show_name").textContent = name;
+        document.getElementById("show_field").textContent = field;
+        document.getElementById("show_intro").textContent = introduction;
+        document.getElementById("profile").hidden = false;
+        document.getElementById("make-appointment-button").disabled = false;
+    }
 
+    function make_appointment_new() {
+        const doctor_id = document.getElementById("current_id").textContent;
+        const start_time = document.getElementById("appointment_date_new").value;
+        const duration = document.getElementById("duration_new").value;
+        console.log("id is:", doctor_id);
+        console.log("start_time:", start_time);
+        console.log("duration:", duration);
+
+        if (doctor_id != "init" && start_time != '' && duration != 'None'){
+            if (confirm("Are you sure?")){
+                $.ajax({
+                type: 'POST',
+                contentType:'application/json;charset-utf-08',
+                dateType: 'json',
+                url: "http://127.0.0.1:5000/patient/send_appointment?doctor_id="+doctor_id
+                    + '&patient_id='+ {{ patient_id }}
+                    + '&start_time='+ start_time
+                    + '&duration='+ duration
+            });
+            }
+        }
+    }
+
+    function set_patient_info(state) {
+        document.getElementById("patient-info").hidden = !state;
+        document.getElementById("patient-info").disabled = !state;
+    }
+
+    function set_current_provider(state) {
+        document.getElementById("current-provider").hidden = !state;
+        document.getElementById("current-provider").disabled = !state;
+    }
+
+    function set_new_provider(state) {
+        document.getElementById("new-provider").hidden = !state;
+        document.getElementById("new-provider").disabled = !state;
+    }
+
+    function show_patient_info() {
+        set_patient_info(true);
+        set_current_provider(false);
+        set_new_provider(false);
+    }
+
+    function show_provider() {
+        set_patient_info(false);
+        {% if my_provider %}
+            set_new_provider(false);
+            set_current_provider(true);
+        {% else %}
+            set_new_provider(true);
+            set_current_provider(false);
+        {% endif %}
+    }
+</script>
+{% endblock %}
 </html>
