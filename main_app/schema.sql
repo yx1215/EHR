@@ -51,16 +51,17 @@ CREATE TABLE take_care (
     doctor_id INTEGER,
     patient_id INTEGER,
     PRIMARY KEY (doctor_id, patient_id),
-    FOREIGN KEY (doctor_id) REFERENCES doctors (id),
-    FOREIGN KEY (patient_id) REFERENCES patients (id)
+    FOREIGN KEY (doctor_id) REFERENCES doctors (id) on delete cascade,
+    FOREIGN KEY (patient_id) REFERENCES patients (id) on delete cascade
 );
 
 CREATE TABLE schedule (
-    doctor_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    doctor_id INTEGER,
     start_time TEXT NOT NULL,
     duration INTEGER NOT NULL check ( duration=30 or duration=60 ),
     occupied BOOLEAN NOT NULL,
-    FOREIGN KEY (doctor_id) REFERENCES doctors (id)
+    PRIMARY KEY (doctor_id, start_time),
+    FOREIGN KEY (doctor_id) REFERENCES doctors (id) on delete cascade
 );
 
 CREATE TABLE appointment (
@@ -71,9 +72,11 @@ CREATE TABLE appointment (
     duration DATETIME NOT NULL,
     location VARCHAR(8) NOT NULL,
     status VARCHAR(10) check ( status='pending' or status='accepted' ),
-    FOREIGN KEY (doctor_id, start_time, duration) REFERENCES schedule (doctor_id, start_time, duration),
-    FOREIGN KEY (patient_id) REFERENCES patients (id)
+    FOREIGN KEY (doctor_id) REFERENCES doctors (id) on delete cascade,
+    FOREIGN KEY (patient_id) REFERENCES patients (id) on delete cascade
 
 );
+
+
 
 

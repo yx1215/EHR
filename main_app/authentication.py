@@ -19,6 +19,7 @@ def register():
         register_type = request.form["register_type"]
         db = get_db()
         error = None
+
         if register_type != 'admin' and register_type != 'patient':
             error = 'please choose a correct type of user to register.'
             flash(error)
@@ -31,10 +32,12 @@ def register():
         email = request.form["email"]
         phone_number = request.form["phone_number"]
         gender = request.form["gender"]
+
         if repeat_password != password:
             error = "two passwords are not the same."
             flash(error)
             return render_template('/auth/register.html')
+
         if register_type == "patient":
             height = request.form["height"]
             weight = request.form["weight"]
@@ -44,8 +47,10 @@ def register():
             if not first_name:
                 error = "first name is required."
             elif not last_name:
-                error = "last name is required"
+
+                error = "last name is required."
             elif not password:
+
                 error = "password is required."
             elif not email:
                 error = "email is required."
@@ -60,9 +65,11 @@ def register():
             elif not data_of_birth:
                 error = "birthday is required."
             elif db.execute('SELECT id FROM patients WHERE email = ?', (email, )).fetchone() is not None:
+
                 error = "Email {} has already registered.".format(email)
 
             if error is None:
+                print("here")
                 db.execute('INSERT INTO patients (last_name, first_name, password, email, phone_number, gender, height, weight, data_of_birth, emergency_contacts) VALUES '
                            '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                            (last_name, first_name, generate_password_hash(password), email, phone_number, gender, height, weight, data_of_birth, emergency_contacts)
@@ -114,6 +121,7 @@ def login():
         password = request.form['password']
         db = get_db()
         error = None
+
         if login_type == 'patient':
             user = db.execute(
                 'SELECT * FROM patients WHERE email = ?', (email,)

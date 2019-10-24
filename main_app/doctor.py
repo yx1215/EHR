@@ -29,7 +29,9 @@ def accept_appointment():
     start_time = request.args["start_time"]
     db = get_db()
     db.execute("UPDATE appointment SET status = 'accepted' WHERE patient_id=? and doctor_id=? and start_time=?", (patient_id, doctor_id, start_time))
+    db.execute("INSERT INTO take_care (doctor_id, patient_id) VALUES (?, ?)", (doctor_id, patient_id))
     db.commit()
+
     return redirect(url_for('doctor.show_main', id=doctor_id))
 
 

@@ -453,7 +453,7 @@
 
                     <!--My Current Providers-->
                     <hr/>
-                    <div class="container" id="current-provider">
+                    <div class="container" id="current-provider" hidden disabled>
                         <div class="card col-md-12">
                             <br>
                             <div class="userData">
@@ -504,17 +504,13 @@
                             <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">My Provider Information</h2>
                             <br>
                             <div class="row">
-                                <div class="col-md-6 img mb-3">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q" alt="" class="img-rounded">
-                                </div>
                                 <div class="col-md-6 details">
                                     <blockquote>
-                                        <h5>Fiona Gallagher</h5>
+                                        <h5 id="current_doctor_name"></h5>
                                         <small><cite title="Source Title">4.5/5.0, 5000 patients rated<i class="icon-map-marker"></i></cite></small>
                                     </blockquote>
-                                    <p>
-                                        Gender Surgery Doctor <br> long ass introduction here long ass introduction here long ass introduction herelong ass introduction long ass introduction here long ass introduction here long ass introduction herelong
-                                        ass introduction here
+                                    <p id="current_doctor_intro">
+
                                     </p>
                                 </div>
                             </div>
@@ -530,7 +526,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card acik-renk-form" id="new-provider">
+                                <div class="card acik-renk-form" id="new-provider" hidden disabled>
                                     <div class="card-body">
                                         <div class="userData">
                                             <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">Find Your Professional Provider</h2>
@@ -1198,9 +1194,13 @@
     function show_provider() {
         set_patient_info(false);
         {% if my_provider %}
+            console.log("I have a provider");
             set_new_provider(false);
             set_current_provider(true);
+            document.getElementById("current_doctor_name").textContent = "{{ my_provider['last_name'] }}" + " " + "{{ my_provider['first_name'] }}";
+            document.getElementById("current_doctor_intro").textContent = "{{ my_provider['introduction'] }}";
         {% else %}
+            console.log("I don't have a provider");
             set_new_provider(true);
             set_current_provider(false);
         {% endif %}
