@@ -69,6 +69,7 @@ CREATE TABLE appointment (
     doctor_id INTEGER NOT NULL,
     patient_id INTEGER NOT NULL,
     start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
     duration DATETIME NOT NULL,
     location VARCHAR(8) NOT NULL,
     status VARCHAR(10) check ( status='pending' or status='accepted' ),
