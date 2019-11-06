@@ -452,8 +452,8 @@
 
 
                     <!--Scheduler-->
-                    <hr>
-                    <div class='card'>
+                    <hr hidden>
+                    <div class='card' hidden>
                         <br>
                         <h2 class="d-block col-8" style="font-size: 1.5rem; font-weight: bold"> Hello, {{g.user['first_name']}}, your Recent Appointment is Here!</h2>
                         <br>
@@ -636,24 +636,29 @@
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Input doctor name...">
+                                                    <input type="text" class="form-control" placeholder="Input doctor name..." id="doctor_new">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                <button type="button" class="btn btn-primary  pl-5 pr-5">Search</button>
+                                                <button type="button" class="btn btn-primary  pl-5 pr-5" onclick="search()">Search</button>
                                             </div>
                                         </div>
                                     </div>
                                     <!--start of doctor list-->
                                     <div class="card-group" style="height:300px">
 
-                                        <div class='card col-2 mb-4'>
+                                        <div class='card col-3 mb-4'>
                                             <div id="" style="height:300px; overflow-y:scroll;">
                                                 <div id="doctor_list" class="list-group">
                                                     {% for doctor in all_doctors %}
-                                                    <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}')">
-                                                {{doctor["last_name"] + " " + doctor["first_name"]}}
-                                            </a> {% endfor %}
+                                                    {% if doctor["occupied"] == False %}
+                                                    <a id="{{doctor['last_name']}} {{doctor['first_name']}} {{doctor['start_time']}}:{{doctor['duration']}}min" class="list-group-item list-group-item-action" style="font-size: 12px;" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}')">
+                                                        <br>{{doctor["last_name"] + " " + doctor["first_name"]}}
+                                                        <br>{{doctor["start_time"]}}
+                                                        <br>{{doctor["duration"] + "min"}}
+                                                    </a>
+                                                    {% endif %}
+                                                    {% endfor %}
                                                     <strong id="current_id" hidden>init</strong>
                                                 </div>
                                             </div>
@@ -1237,11 +1242,7 @@
                     contentType: 'application/json;charset-utf-08',
                     dateType: 'json',
                     url: "http://127.0.0.1:5000/patient/send_appointment?doctor_id=" + doctor_id +
-                        '&patient_id=' + {
-                            {
-                                patient_id
-                            }
-                        } +
+                        '&patient_id=' + {{patient_id}} +
                         '&start_time=' + start_time +
                         '&duration=' + duration
                 });
@@ -1271,20 +1272,37 @@
     }
 
     function show_provider() {
-        set_patient_info(false); { %
-            if my_provider %
-        }
-        console.log("I have a provider");
-        set_new_provider(false);
-        set_current_provider(true);
-        document.getElementById("current_doctor_name").textContent = "{{ my_provider['last_name'] }}" + " " + "{{ my_provider['first_name'] }}";
-        document.getElementById("current_doctor_intro").textContent = "{{ my_provider['introduction'] }}"; { %
-            else %
-        }
-        console.log("I don't have a provider");
-        set_new_provider(true);
-        set_current_provider(false); { % endif %
-        }
+        set_patient_info(false);
+        {% if my_provider %}
+            console.log("I have a provider");
+            set_new_provider(false);
+            set_current_provider(true);
+            document.getElementById("current_doctor_name").textContent = "{{ my_provider['last_name'] }}" + " " + "{{ my_provider['first_name'] }}";
+            document.getElementById("current_doctor_intro").textContent = "{{ my_provider['introduction'] }}";
+        {% else %}
+            console.log("I don't have a provider");
+            set_new_provider(true);
+            set_current_provider(false);
+        {% endif %}
+    }
+
+    function search() {
+        const d = document.getElementById("doctor_new").value;
+        const time = document.getElementById("appointment_date_new").value;
+        const duration = document.getElementById("duration_new").value;
+        console.log("here", d, time, duration);
+
+        {% for doctor in all_doctors %}
+        console.log("{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}", "{{doctor['start_time']}}", "{{doctor['duration']}}");
+            if (d == "{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}" && time == "{{doctor['start_time']}}"&& duration == "{{doctor['duration']}}"){
+                console.log("here2", d, time, duration);
+                document.getElementById("{{doctor['last_name']}} {{doctor['first_name']}} {{doctor['start_time']}}:{{doctor['duration']}}min").hidden = false;
+
+            }
+            else {
+                document.getElementById("{{doctor['last_name']}} {{doctor['first_name']}} {{doctor['start_time']}}:{{doctor['duration']}}min").hidden = true;
+            }
+        {% endfor %}
     }
 </script>
 {% endblock %}
