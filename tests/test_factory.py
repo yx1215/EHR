@@ -8,4 +8,4 @@ def test_config():
 
 def test_hello(client):
     response = client.get('/welcome')
-    assert response.data == b'Welcome to our ERH system.'
+    assert response.data == b'Welcome to our EHR system.'

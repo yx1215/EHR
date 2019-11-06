@@ -29,17 +29,6 @@ def send_appointment():
     print(request.args)
     db = get_db()
     db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status) '
-               'VALUES (?, ?, ?, ? ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending'))
+               'VALUES (?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending'))
     db.commit()
     return redirect(url_for('patient.show_main', id=patient_id))
-def search_doc():
-    doctor_id = request.args.get("doctor_id")
-    start_time = request.args.get("start_time")
-    end_time = request.args.get("end_time")
-    print(request.args)
-    db = get_db()
-    time = db.execute('SELECT * from appointment where doctor_id = ?, start_time >= ?, start_time <= ? order by start_time', (doctor_id, start_time, end_time))
-    print(request.args)
-    db = get_db()
-    db.execute()
-

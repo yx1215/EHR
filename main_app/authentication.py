@@ -1,13 +1,12 @@
 import functools
-from flask_login import UserMixin
-from flask_login import LoginManager
+
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-# from . import db
+
 from main_app.database import get_db
-from . import login_manager
+
 
 SECRET_KEY = generate_password_hash('12345')
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
@@ -198,10 +197,3 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
-
-@login_manager.user_loader
-def load_user(user_id):
-    """Check if user is logged-in on every page load."""
-    if user_id is not None:
-        return
-    return None
