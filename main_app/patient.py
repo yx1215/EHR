@@ -14,8 +14,8 @@ patient_bp = Blueprint('patient', __name__, url_prefix="/patient")
 @login_required
 def show_main(id):
     db = get_db()
-    provider = db.execute("SELECT * FROM take_care NATURAL JOIN doctors WHERE patient_id=?", (id, )).fetchone()
-    doctors = db.execute("SELECT * FROM doctors JOIN schedule s on doctors.id = s.doctor_id").fetchall()
+    provider = db.execute("SELECT * FROM take_care JOIN doctors ON take_care.doctor_id = doctors.id WHERE patient_id=?", (id, )).fetchone()
+    doctors = db.execute("SELECT * FROM doctors JOIN schedule s on doctors.id = s.doctor_id ORDER BY s.doctor_id").fetchall()
     return render_template('/patient.html', patient_id=id, my_provider=provider, all_doctors=doctors)
 
 

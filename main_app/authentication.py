@@ -167,19 +167,23 @@ def load_logged_in_user():
 
     if user_id is None:
         g.user = None
+        g.type = None
     else:
         if login_type == 'admin':
             g.user = get_db().execute(
                 'SELECT * FROM administrators WHERE id = ?', (user_id,)
             ).fetchone()
+            g.type = 'admin'
         elif login_type == 'patient':
             g.user = get_db().execute(
                 'SELECT * FROM patients WHERE id = ?', (user_id,)
             ).fetchone()
+            g.type = 'patient'
         else:
             g.user = get_db().execute(
                 'SELECT * FROM doctors WHERE id = ?', (user_id,)
             ).fetchone()
+            g.type = 'doctor'
 
 
 @auth_bp.route('/logout')
