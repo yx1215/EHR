@@ -540,16 +540,17 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group ">
-                                        <input type='datetime-local' class="form-control" id='appointment_date_current' required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group ">
-                                        <select id="duration_current" class="form-control">
-                                            <option value="None" selected>Appointemnt Duration</option>
-                                            <option value="30">30 minute</option>
-                                            <option value="60">60 mintue</option>
+                                        <select id="my_provider_schedule" class="form-control" onchange="select_schedule_for_my_provider(this.options[this.selectedIndex].value, this.options[this.selectedIndex].textContent)">
+                                            <option value="None" selected>Choose the time you want</option>
+                                            {% if my_provider_schedule %}
+                                            {% for s in my_provider_schedule %}
+                                            {% if s["occupied"] == False %}
+                                            <option value="valid">{{s["start_time"]}}, {{s["duration"]}}min</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
                                         </select>
+                                        <p id="selected_schedule_duration" hidden>init</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -571,7 +572,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group ">
-                                        <button type="button" class="btn btn-primary  pl-5 pr-5">Send Request</button>
+                                        <button type="button" class="btn btn-primary  pl-5 pr-5" onclick="make_appointment_with_my_provider()">Send Request</button>
                                     </div>
                                 </div>
                             </div>
@@ -1190,7 +1191,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/login">Logout</a>
+                    <a class="btn btn-primary" href="{{ url_for('auth.logout') }}">Logout</a>
                 </div>
             </div>
         </div>
@@ -1233,20 +1234,21 @@
 
     function make_appointment_new() {
         const doctor_id = document.getElementById("current_id").textContent;
+        const patient_id = '{{ g.user[id] }}';
         const start_time = document.getElementById("appointment_date_new").value;
         const duration = document.getElementById("duration_new").value;
         console.log("id is:", doctor_id);
         console.log("start_time:", start_time);
         console.log("duration:", duration);
 
-        if (doctor_id != "init" && start_time != '' && duration != 'None') {
+        if (doctor_id !== "init" && start_time !== '' && duration !== 'None') {
             if (confirm("Are you sure?")) {
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json;charset-utf-08',
                     dateType: 'json',
                     url: "http://127.0.0.1:5000/patient/send_appointment?doctor_id=" + doctor_id +
-                        '&patient_id=' + {{patient_id}} +
+                        '&patient_id=' + patient_id +
                         '&start_time=' + start_time +
                         '&duration=' + duration
                 });
@@ -1309,6 +1311,33 @@
             }
         {% endif %}
         {% endfor %}
+    }
+    
+    function select_schedule_for_my_provider(value, schedule_duration) {
+        console.log(value, schedule_duration);
+        if (value === "valid") {
+            document.getElementById("selected_schedule_duration").textContent = schedule_duration;
+        }
+        else {
+            document.getElementById("selected_schedule_duration").textContent = 'init';
+        }
+
+    }
+
+    function make_appointment_with_my_provider(){
+        const schedule_duration = document.getElementById("selected_schedule_duration").textContent;
+        const doctor_id = "{{my_provider['id']}}";
+        if (schedule_duration !== 'init') {
+            if (confirm("Are you sure?")) {
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json;charset-utf-08',
+                    dateType: 'json',
+                    url: "http://127.0.0.1:5000/patient/make_appointment_with_current_provider?doctor_id=" + doctor_id +
+                        '&schedule_duration=' + schedule_duration
+                });
+            }
+        }
     }
 </script>
 {% endblock %}

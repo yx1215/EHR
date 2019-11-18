@@ -17,7 +17,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -29,7 +29,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="./">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -51,8 +51,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Viewing:</h6>
-                        <a class="collapse-item" href="buttons.html">Pending Patient</a>
-                        <a class="collapse-item" href="buttons.html">Current Patient</a>
+                        <a class="collapse-item" onclick="view_pending_patient(false)">Pending Patient</a>
+                        <a class="collapse-item" onclick="view_my_patient(false)">Current Patient</a>
                     </div>
                 </div>
             </li>
@@ -61,59 +61,16 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <span>My schedule</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <h6 class="collapse-header">Manage your schedule</h6>
+                        <a class="collapse-item" onclick="show_add_schedule(false)">Add new slots</a>
+                        <a class="collapse-item" onclick="view_my_schedule(false)">View my schedule</a>
+
                     </div>
                 </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="/login">Login</a>
-                        <a class="collapse-item" href="/register">Register</a>
-                        <a class="collapse-item" href="/forgot-password">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="/404">404 Page</a>
-                        <a class="collapse-item" href="/blank">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="/charts">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="/tables">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
             </li>
 
             <!-- Divider -->
@@ -315,7 +272,7 @@
                 <div class="container-fluid">
 
                     <!--Start of Viewing Pending Patient-->
-                    <div class='card mb-3' id="pending_patient">
+                    <div class='card mb-3' id="pending_patient" hidden>
                         <div class="card-header py-2 mb-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Pending Patient List</h6>
                         </div>
@@ -338,7 +295,7 @@
                             <div class='card mb-4' id='appointment-info' style="height:300px; overflow-y:scroll;">
                                 <div class="btn-group">
                                     <form>
-                                        <button id="accept" class="btn-warning" type="submit" onclick="accept_appointment()" disabled>Accept as New Patient</button>
+                                        <button id="accept" class="btn-warning" type="submit" onclick="accept_appointment()" disabled>Accept appointment</button>
                                     </form>
                                 </div>
 
@@ -370,8 +327,8 @@
                     </div>
                     <!--End of Viewing Pending Patient-->
 
-
-                     <div class="row">
+                    <!--Start of adding schedule-->
+                     <div class="row" id="add_schedule" hidden>
                             <div class="col-md-12">
                                 <div class="card acik-renk-form" id="new-provider">
                                     <div class="card-body">
@@ -428,7 +385,7 @@
 
                 
                     <!--Start of Viewing Current Patient-->
-                    <div class='card mb-3' id="view_doctor">
+                    <div class='card mb-3' id="current_patient" hidden>
                         <div class="card-header py-2 mb-3">
                             <h6 class="m-0 font-weight-bold text-primary">My Current Patient List</h6>
                         </div>
@@ -442,9 +399,9 @@
                             <div class='card col-2 mb-4'>
                                 <div id="" style="height:300px; overflow-y:scroll;">
                                     <div id="doctor_list" class="list-group">
-                                        {% for a_p in accept %}
-                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_accepted_appointment('{{ a_p[ 'id' ]}}', '{{ a_p[ 'last_name' ]}}' + ' ' + '{{ a_p[ 'first_name' ]}}', '{{ a_p[ 'start_time' ]}}', '{{ a_p[ 'duration' ]}}', '{{ a_p[ 'location' ]}}')">
-                                            {{a_p["last_name"] + " " + a_p["first_name"]}}
+                                        {% for patient in my_patient %}
+                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_accepted_appointment('{{ patient[ 'id' ]}}', '{{ patient[ 'last_name' ]}}' + ' ' + '{{ patient[ 'first_name' ]}}', '{{ patient['medical_his']}}','{{ patient['phone_number'] }}' ,'{{ patient['gender'] }}', '{{ patient['height']}}', '{{ patient['weight']}}', '{{ patient['date_of_birth']}}', '{{ patient['emergency_contacts']}}')">
+                                            {{patient["last_name"] + " " + patient["first_name"]}}
                                         </a> {% endfor %}
                                         <strong id="current_patient_id_accepted" hidden>init</strong>
 
@@ -454,10 +411,8 @@
                             <!--Start of Doctor Info-->
                             <div class='card col-6 mb-4' id='doctor_information' style="height:300px; overflow-y:scroll;">
                                 <div class="btn-group">
-                                    <button class="btn-primary">Edit</button>
-                                    <button class="btn-primary">Save</button>
                                     <form id="delete_form">
-                                        <button id="delete_doctor_button" class="btn-warning" type="submit" onclick="delete_doctor()" disabled>Checke out</button>
+                                        <button id="check_out_button" class="btn-warning" type="submit" onclick="check_out()" disabled>Check out</button>
                                     </form>
                                 </div>
 
@@ -466,15 +421,22 @@
                                     <div class="row">
                                         <div class="well profile" id="appointment-profile_accepted" hidden>
                                             <h2 id="patient_accepted"></h2>
-                                            <p><strong>Start From: </strong></p>
-                                            <p id="start_time_accepted">
+                                            <p><strong>Gender: </strong></p>
+                                            <p id="gender_accepted">
                                             </p>
-                                            <p><strong>Duration: </strong> </p>
-                                            <p id="duration_accepted">
+                                            <p><strong>Phone: </strong> </p>
+                                            <p id="phone_accepted">
                                             </p>
-                                            <p><strong>Location: </strong> </p>
-                                            <p id="location_accepted">
+                                            <p><strong>Height/Weight: </strong> </p>
+                                            <p id="height_weight_accepted">
                                             </p>
+                                            <p><strong>Birthday: </strong> </p>
+                                            <p id="birthday_accepted">
+                                            </p>
+                                            <p><strong>Emergency Contact: </strong> </p>
+                                            <p id="emergency_contact_accepted">
+                                            </p>
+
                                         </div>
 
                                     </div>
@@ -486,10 +448,10 @@
 
                             <!--Start of Input Box-->
                             <div class='card col-6 mb-4' id='doctor_information2'>
-                                <textarea style="height:230px; overflow-y:scroll;">
+                                <textarea style="height:230px; overflow-y:scroll;" id="medical_his" disabled>
                                 </textarea>
                                 <button class="btn-primary">Prescribe</button>
-                                <button class="btn-primary">Diagnosis</button>
+                                <button class="btn-primary" onclick="diagnosis()">Diagnosis</button>
                             </div>
                             <!--End of Input Box-->
                             <!--End of Doctor Info-->
@@ -499,7 +461,68 @@
                         <!--End of View Doctor-->
                     </div>
                     <!--End of viewing Current Patient-->
+                    <!--Start of Viewing my schedule-->
+                    <div class='card mb-3' id="my_schedule">
+                        <div class="card-header py-2 mb-3">
+                            <h6 class="m-0 font-weight-bold text-primary">My schedule</h6>
+                        </div>
 
+                        <div class="card-group" style="height:300px">
+
+                            <div class='card col-3 mb-4'>
+                                <div style="height:300px; overflow-y:scroll;">
+                                    <div id="schedule_list" class="list-group">
+                                                    {% for s in my_schedule %}
+
+                                                        <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}')">
+                                                            <br>{{s["start_time"]}}
+                                                            <br>{{s["duration"] + "min"}}
+                                                        </a>
+
+                                                    {% endfor %}
+                                                    <strong id="current_id" hidden>init</strong>
+                                        <strong id="current_schedule_id" hidden>init</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Start of Schedule Info-->
+                            <div class='card mb-4' id='schedule_info' style="height:300px; overflow-y:scroll;">
+                                <div class="btn-group">
+                                    <form>
+                                        <button id="delete_schedule_button" class="btn-warning" type="submit" onclick="delete_schedule()" disabled>Delete schedule</button>
+                                    </form>
+                                </div>
+
+                                <!--Start of Schedule Detail-->
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="well profile" id="schedule_detail" hidden>
+                                            <p><strong>Start From: </strong></p>
+                                            <p id="schedule_time">
+                                            </p>
+                                            <p><strong>Duration: </strong> </p>
+                                            <p id="schedule_duration">
+                                            </p>
+                                            <p><strong>Scheduled with: </strong> </p>
+                                            <p id="schedule_patient">
+                                            </p>
+                                            <p><strong>Location: </strong> </p>
+                                            <p id="schedule_location">
+                                            </p>
+                                            <h2 id="selected_schedule" hidden>None</h2>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--End of Schedule Detail-->
+
+
+                            </div>
+                            <!--End of Schedule Info-->
+
+                        </div>
+                    </div>
+                    <!--End of Viewing Pending Patient-->
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -539,7 +562,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/login">Logout</a>
+                    <a class="btn btn-primary" href="{{ url_for('auth.logout') }}">Logout</a>
                 </div>
             </div>
         </div>
@@ -574,30 +597,101 @@
         document.getElementById("accept").disabled = false;
     }
 
-    function view_accepted_appointment(patient_id, patient_name, start_time, duration, location) {
+    function view_accepted_appointment(patient_id, patient_name, medical_his, gender, phone_number, height, weight, birthday, emergency_contact) {
         document.getElementById("current_patient_id_accepted").textContent = patient_id;
         document.getElementById("patient_accepted").textContent = patient_name;
-        document.getElementById("start_time_accepted").textContent = start_time;
-        document.getElementById("duration_accepted").textContent = duration + ' minutes';
-        document.getElementById("location_accepted").textContent = location;
+        document.getElementById("gender_accepted").textContent = gender;
+        document.getElementById("phone_accepted").textContent = phone_number;
+        document.getElementById("height_weight_accepted").textContent = height + "/" + weight;
+        document.getElementById("birthday_accepted").textContent = birthday;
+        document.getElementById("emergency_contact_accepted").textContent = emergency_contact;
         document.getElementById("appointment-profile_accepted").hidden = false;
+        document.getElementById("check_out_button").disabled = false;
+        if (medical_his !== "None") {
+            document.getElementById("medical_his").value = medical_his;
+        }
+        else{
+            document.getElementById("medical_his").value = "";
+        }
+        document.getElementById("medical_his").disabled = false;
+
     }
 
+    function view_pending_patient(state){
+        document.getElementById("pending_patient").hidden = state;
+        document.getElementById("current_patient").hidden = !state;
+        document.getElementById("add_schedule").hidden = !state;
+        document.getElementById("my_schedule").hidden = !state
+    }
+
+    function view_my_patient(state){
+        document.getElementById("pending_patient").hidden = !state;
+        document.getElementById("current_patient").hidden = state;
+        document.getElementById("add_schedule").hidden = !state;
+        document.getElementById("my_schedule").hidden = !state;
+    }
+
+    function show_add_schedule(state){
+        document.getElementById("pending_patient").hidden = !state;
+        document.getElementById("current_patient").hidden = !state;
+        document.getElementById("add_schedule").hidden = state;
+        document.getElementById("my_schedule").hidden = !state;
+    }
+
+    function view_my_schedule(state){
+        document.getElementById("pending_patient").hidden = !state;
+        document.getElementById("current_patient").hidden = !state;
+        document.getElementById("add_schedule").hidden = !state;
+        document.getElementById("my_schedule").hidden = state;
+    }
+
+    function show_schedule_detail(start_time, duration, patient_last_name, patient_first_name, location){
+        document.getElementById("delete_schedule_button").disabled = false;
+        document.getElementById("schedule_detail").hidden = false;
+        document.getElementById("schedule_time").textContent = start_time;
+        document.getElementById("schedule_duration").textContent = duration;
+        if (patient_first_name === "None"){
+            document.getElementById("schedule_patient").textContent = "None";
+        }
+        else {
+            document.getElementById("schedule_patient").textContent = patient_last_name + " " + patient_first_name;
+        }
+        document.getElementById("schedule_location").textContent = location;
+        document.getElementById("selected_schedule").textContent = start_time;
+    }
+
+    function delete_schedule(){
+        const start_time = document.getElementById("selected_schedule").textContent;
+        const doctor_id = "{{g.user['id']}}";
+        console.log(start_time, doctor_id);
+        if (start_time !== "None"){
+            if (confirm("Are you sure?")){
+                $.ajax({
+                type: 'POST',
+                contentType:'application/json;charset-utf-08',
+                dateType: 'json',
+                url: "http://127.0.0.1:5000/doctor/delete_schedule?"
+                    + '&doctor_id='+ doctor_id
+                    + '&start_time='+ start_time
+            });
+            }
+        }
+    }
     function accept_appointment() {
         const patient_id = document.getElementById("current_patient_id_pending").textContent;
         const start_time = document.getElementById("start_time_pending").textContent;
-
+        const doctor_id = "{{g.user['id']}}";
         console.log("start_time:", start_time);
 
 
-        if (patient_id != "init"){
+        if (patient_id !== "init"){
             if (confirm("Are you sure?")){
                 $.ajax({
                 type: 'POST',
                 contentType:'application/json;charset-utf-08',
                 dateType: 'json',
                 url: "http://127.0.0.1:5000/doctor/accept_appointment?patient_id="+patient_id
-                    + '&doctor_id='+ {{ doctor_id }}
+                    + '&doctor_id='+ doctor_id
                     + '&start_time='+ start_time
             });
             }
@@ -609,17 +703,48 @@
         const duration = document.getElementById("duration_new").value;
         const doctor_id = "{{g.user['id']}}";
         console.log(doctor_id);
-        if (time != "" && duration != "None"){
+        if (time !== "" && duration !== "None"){
             if (confirm("Are you sure?")){
                 $.ajax({
                 type: 'POST',
                 contentType:'application/json;charset-utf-08',
                 dateType: 'json',
                 url: "http://127.0.0.1:5000/doctor/set_schedule?duration="+duration
-                    + '&doctor_id='+ {{ doctor_id }}
+                    + '&doctor_id='+ doctor_id
                     + '&start_time='+ time
             });
             }
+        }
+    }
+
+    function check_out() {
+        const patient_id = document.getElementById("current_patient_id_accepted").textContent;
+        const doctor_id = "{{g.user['id']}}";
+        if (patient_id !== "init") {
+            if (confirm("Are you sure?")) {
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json;charset-utf-08',
+                    dateType: 'json',
+                    url: "http://127.0.0.1:5000/doctor/check_out?patient_id=" + patient_id
+                        + '&doctor_id=' + doctor_id
+                });
+            }
+        }
+    }
+
+    function diagnosis(){
+        const content = document.getElementById("medical_his").value;
+        const patient_id = document.getElementById("current_patient_id_accepted").textContent;
+        console.log(content, patient_id);
+        if (confirm("Are you sure?")) {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json;charset-utf-08',
+                dateType: 'json',
+                url: "http://127.0.0.1:5000/doctor/write_medical_his?medical_his=" + content
+                    + '&patient_id=' + patient_id
+            });
         }
     }
 </script>
