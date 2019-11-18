@@ -192,10 +192,32 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-def login_required(view):
+def login_required_admin(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user is None:
+        if g.user is None or g.type != 'admin':
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
+def login_required_patient(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None or g.type != 'patient':
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
+def login_required_doctor(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None or g.type != 'doctor':
             return redirect(url_for('auth.login'))
 
         return view(**kwargs)

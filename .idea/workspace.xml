@@ -4,19 +4,12 @@
     <option name="SPLITTER_PROPORTION" value="0.6791444" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="change">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/main_app.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/instance/main_app.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/authentication.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/doctor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/patient.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/patient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/administrator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/auth/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/doctor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/patient.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/patient.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -294,7 +287,7 @@
       <workItem from="1573120907128" duration="755000" />
       <workItem from="1573695374591" duration="2558000" />
       <workItem from="1573808427659" duration="969000" />
-      <workItem from="1573978099192" duration="20749000" />
+      <workItem from="1573978099192" duration="21304000" />
     </task>
     <task id="LOCAL-00001" summary="change register.html">
       <created>1570293454733</created>
@@ -415,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573695413716</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="change">
+      <created>1574057145462</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1574057145463</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -4,7 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 from werkzeug.security import generate_password_hash
 
-from main_app.authentication import login_required
+from main_app.authentication import login_required_admin
 from main_app.database import get_db
 
 
@@ -28,14 +28,14 @@ def get_doctor(id):
 
 
 @admin_bp.route('/admin_page', methods=('GET', 'POST'))
-@login_required
+@login_required_admin
 def show_main():
     doctors = get_all_doctors()
     return render_template('/administrator.html', all_doctors=doctors)
 
 
 @admin_bp.route('/add_doctor', methods=('GET', 'POST'))
-@login_required
+@login_required_admin
 def add_doctor():
     if request.method == 'POST':
         db = get_db()
@@ -95,7 +95,7 @@ def add_doctor():
 
 
 @admin_bp.route('/delete_doctor', methods=("POST", ))
-@login_required
+@login_required_admin
 def delete_doctor():
     doctor_id = request.args.get("id")
     print(doctor_id)

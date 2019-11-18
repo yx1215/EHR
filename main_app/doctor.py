@@ -2,14 +2,14 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 
-from main_app.authentication import login_required
+from main_app.authentication import login_required_doctor
 from main_app.database import get_db
 
 doctor_bp = Blueprint('doctor', __name__, url_prefix="/doctor")
 
 
 @doctor_bp.route("/doctor_page", methods=('GET', 'POST'))
-@login_required
+@login_required_doctor
 def show_main():
     db = get_db()
     pending_appointment = db.execute("SELECT * FROM appointment JOIN patients on patients.id=appointment.patient_id "
@@ -27,7 +27,7 @@ def show_main():
 
 
 @doctor_bp.route("/accept_appointment", methods=('POST', ))
-@login_required
+@login_required_doctor
 def accept_appointment():
     patient_id = request.args["patient_id"]
     doctor_id = request.args["doctor_id"]
@@ -43,7 +43,7 @@ def accept_appointment():
 
 
 @doctor_bp.route("/set_schedule", methods=('POST', ))
-@login_required
+@login_required_doctor
 def set_schedule():
     doctor_id = request.args["doctor_id"]
     start_time = request.args["start_time"]
@@ -57,7 +57,7 @@ def set_schedule():
 
 
 @doctor_bp.route("/delete_schedule", methods=('POST', ))
-@login_required
+@login_required_doctor
 def delete_schedule():
     doctor_id = request.args["doctor_id"]
     start_time = request.args["start_time"]
@@ -70,7 +70,7 @@ def delete_schedule():
 
 
 @doctor_bp.route("/check_out", methods=('POST', ))
-@login_required
+@login_required_doctor
 def check_out():
     doctor_id = request.args["doctor_id"]
     patient_id = request.args["patient_id"]
@@ -83,7 +83,7 @@ def check_out():
 
 
 @doctor_bp.route("/write_medical_his", methods=('POST', ))
-@login_required
+@login_required_doctor
 def write_medical_his():
     patient_id = request.args["patient_id"]
     medical_his = request.args["medical_his"]

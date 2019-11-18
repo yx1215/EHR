@@ -4,14 +4,14 @@ from flask import (
 from werkzeug.exceptions import abort
 from werkzeug.security import generate_password_hash
 
-from main_app.authentication import login_required
+from main_app.authentication import login_required_patient
 from main_app.database import get_db
 
 patient_bp = Blueprint('patient', __name__, url_prefix="/patient")
 
 
 @patient_bp.route("/patient_page", methods=('GET', 'POST'))
-@login_required
+@login_required_patient
 def show_main():
     db = get_db()
     provider = db.execute("SELECT * FROM take_care JOIN doctors ON take_care.doctor_id = doctors.id WHERE patient_id=?", (g.user['id'], )).fetchone()
@@ -24,7 +24,7 @@ def show_main():
 
 
 @patient_bp.route("/send_appointment", methods=('POST', ))
-@login_required
+@login_required_patient
 def send_appointment():
     doctor_id = request.args.get("doctor_id")
     patient_id = request.args.get("patient_id")
@@ -39,7 +39,7 @@ def send_appointment():
 
 
 @patient_bp.route("/make_appointment_with_current_provider", methods=('POST', ))
-@login_required
+@login_required_patient
 def make_appointment_with_current_provider():
     doctor_id = request.args.get("doctor_id")
     patient_id = g.user['id']
