@@ -103,3 +103,9 @@ def delete_doctor():
     db.execute('DELETE FROM doctors WHERE id = ?', (doctor_id, ))
     db.commit()
     return redirect(url_for('admin.show_main'))
+
+
+@admin_bp.route('/message', methods=("GET", ))
+@login_required_admin
+def msg():
+    return render_template("message.html")

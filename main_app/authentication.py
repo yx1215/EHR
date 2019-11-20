@@ -6,6 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from main_app.database import get_db
+from flask import jsonify
 
 
 SECRET_KEY = generate_password_hash('12345')
@@ -158,6 +159,13 @@ def login():
         flash(error)
 
     return render_template('/auth/login.html')
+
+
+@auth_bp.route('/api/email', methods=('GET',"POST"))
+def api_email():
+    return jsonify({"email":g.user['email']})
+
+
 
 
 @auth_bp.before_app_request

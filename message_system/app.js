@@ -47,10 +47,9 @@ io.on('connect', (socket) => {
     })
 });
 
-app.get('/api/msg', (req, res) => {
-    res.send(allmessages)});
-
-
+app.get('/api/msg/:email', (req, res) => {
+    res.send(allmessages[req.params.email])
+});
 
 
 server.listen(3000);
