@@ -54,3 +54,9 @@ def make_appointment_with_current_provider():
     db.commit()
 
     return redirect(url_for('patient.show_main'))
+
+
+@patient_bp.route('/message', methods=("GET", ))
+@login_required_patient
+def msg():
+    return render_template("message.html")

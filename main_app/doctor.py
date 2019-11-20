@@ -92,3 +92,9 @@ def write_medical_his():
     db.execute("UPDATE patients SET medical_his=? WHERE id=?", (medical_his, patient_id))
     db.commit()
     return redirect(url_for("doctor.show_main"))
+
+
+@doctor_bp.route('/message', methods=("GET", ))
+@login_required_doctor
+def msg():
+    return render_template("message.html")

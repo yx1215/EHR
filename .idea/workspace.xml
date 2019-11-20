@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9b69f98-1083-4360-ac9b-8763e9eae3c8" name="Default Changelist" comment="change">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/main_app.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/instance/main_app.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/authentication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/patient.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/patient.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/templates/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/administrator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message_system/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/message_system/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/doctor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/patient.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/patient.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -216,7 +214,7 @@
       <workItem from="1573695374591" duration="2558000" />
       <workItem from="1573808427659" duration="969000" />
       <workItem from="1573978099192" duration="23996000" />
-      <workItem from="1574253811678" duration="5100000" />
+      <workItem from="1574253811678" duration="5502000" />
     </task>
     <task id="LOCAL-00001" summary="change register.html">
       <created>1570293454733</created>

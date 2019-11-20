@@ -16,7 +16,7 @@ const example_mail = {
         "date": "Wed, 23 Oct 2019 21:57:44 +0800",
         "subject": "",
     },
-    "to": "bkvdprtkr@xkx.me"
+    "to": ""
 };
 
 
@@ -49,6 +49,11 @@ io.on('connect', (socket) => {
 
 app.get('/api/msg/:email', (req, res) => {
     res.send(allmessages[req.params.email])
+});
+
+app.post('/api/sendmsg/', (req, res) => {
+    //
+    res.send();
 });
 
 
