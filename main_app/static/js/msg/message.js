@@ -10,29 +10,25 @@ function setMessageNumber(n) {
 
 
 function appendMessage(msgObj) {
-    let html;
-    if (msgObj.read) {
-        html = `
-<a class="dropdown-item d-flex align-items-center" href="#">
-    <div>
-        <div class="text">${msgObj.text}</div>
-        <div class="small text-gray-500">${msgObj.sender} · ${msgObj.time}</div>
-    </div>
-</a>
-`
-    } else {
-        html = `
-<a class="dropdown-item d-flex align-items-center" href="#">
-    <div class="font-weight-bold">
-        <div class="text">${msgObj.text}</div>
-        <div class="small text-gray-500">${msgObj.sender} · ${msgObj.time}</div>
-    </div>
-</a>
-`
+    ele = document.createElement("a");
+    ele.className = "dropdown-item d-flex align-items-center";
+    elediv = document.createElement("div");
+    if (!msgObj.read){
+        elediv.className = "font-weight-bold";
     }
+    ele.appendChild(elediv);
 
-    $("#messagehtml").append(html)
+    function creatChild(elediv, className, textContent){
+        child = document.createElement("div");
+        child.className = className;
+        child.textContent = textContent;
+        elediv.appendChild(child);
+    }
+    
+    creatChild(elediv, "text", msgObj.text);
+    creatChild(elediv, "small text-gray-500",`${msgObj.sender} · ${msgObj.time}`);
 
+    $("#messagehtml").append(ele);
 }
 
 
