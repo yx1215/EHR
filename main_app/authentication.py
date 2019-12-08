@@ -148,6 +148,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            session['email'] = user['email']
             session['login_type'] = login_type
             if login_type == 'admin':
                 return redirect(url_for('admin.show_main', id=user['id']))
@@ -163,10 +164,11 @@ def login():
 
 @auth_bp.route('/api/email', methods=('GET',"POST"))
 def api_email():
-    return jsonify({"email":g.user['email']})
-
-
-
+    if "email" in session:
+        return jsonify({"email":session['email']})
+    else:
+        return jsonify({"email":""})
+ 
 
 @auth_bp.before_app_request
 def load_logged_in_user():
