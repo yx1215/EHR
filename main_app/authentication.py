@@ -151,15 +151,16 @@ def login():
             session['email'] = user['email']
             session['login_type'] = login_type
             if login_type == 'admin':
-                return redirect(url_for('admin.show_main', id=user['id']))
+                return redirect(url_for('admin.show_main'))
             elif login_type == 'patient':
-                return redirect(url_for('patient.show_main', id=user['id']))
+                return redirect(url_for('patient.show_main'))
             else:
-                return redirect(url_for('doctor.show_main', id=user['id']))
+                return redirect(url_for('doctor.show_main'))
 
         flash(error)
 
     return render_template('/auth/login.html')
+
 
 
 @auth_bp.route('/api/email', methods=('GET',"POST"))
@@ -168,7 +169,7 @@ def api_email():
         return jsonify({"email":session['email']})
     else:
         return jsonify({"email":""})
- 
+
 
 @auth_bp.before_app_request
 def load_logged_in_user():
@@ -233,3 +234,15 @@ def login_required_doctor(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+

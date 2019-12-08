@@ -97,4 +97,5 @@ def write_medical_his():
 @doctor_bp.route('/message', methods=("GET", ))
 @login_required_doctor
 def msg():
+    print("/message:", g.user)
     return render_template("message.html")
