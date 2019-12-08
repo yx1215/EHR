@@ -162,7 +162,6 @@ def login():
     return render_template('/auth/login.html')
 
 
-
 @auth_bp.route('/api/email', methods=('GET',"POST"))
 def api_email():
     if "email" in session:

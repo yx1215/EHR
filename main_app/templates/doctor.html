@@ -382,7 +382,7 @@
                                 <div id="" style="height:300px; overflow-y:scroll;">
                                     <div id="doctor_list" class="list-group">
                                         {% for patient in my_patient %}
-                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_accepted_appointment('{{ patient[ 'id' ]}}', '{{ patient[ 'last_name' ]}}' + ' ' + '{{ patient[ 'first_name' ]}}', '{{ patient['medical_his']}}','{{ patient['phone_number'] }}' ,'{{ patient['gender'] }}', '{{ patient['height']}}', '{{ patient['weight']}}', '{{ patient['date_of_birth']}}', '{{ patient['emergency_contacts']}}')">
+                                        <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_accepted_appointment('{{ patient[ 'id' ]}}', '{{ patient[ 'last_name' ]}}' + ' ' + '{{ patient[ 'first_name' ]}}', '{{ medical_his_d[1]}}','{{ patient['phone_number'] }}' ,'{{ patient['gender'] }}', '{{ patient['height']}}', '{{ patient['weight']}}', '{{ patient['date_of_birth']}}', '{{ patient['emergency_contacts']}}')">
                                             {{patient["last_name"] + " " + patient["first_name"]}}
                                         </a> {% endfor %}
                                         <strong id="current_patient_id_accepted" hidden>init</strong>
@@ -427,16 +427,11 @@
 
 
                             </div>
+                            <div class='card col-6 mb-4'>
+                                    <textarea style="height:230px; overflow-y:scroll;" id="medical_his_total" disabled>
+                                    </textarea>
+                                </div>
 
-                            <!--Start of Input Box-->
-                            <div class='card col-6 mb-4' id='doctor_information2'>
-                                <textarea style="height:230px; overflow-y:scroll;" id="medical_his" disabled>
-                                </textarea>
-                                <button class="btn-primary">Prescribe</button>
-                                <button class="btn-primary" onclick="diagnosis()">Diagnosis</button>
-                            </div>
-                            <!--End of Input Box-->
-                            <!--End of Doctor Info-->
 
                         </div>
 
@@ -455,13 +450,13 @@
                                 <div style="height:300px; overflow-y:scroll;">
                                     <div id="schedule_list" class="list-group">
                                                     {% for s in my_schedule %}
-                                                        {% if s['first_name'] %}
-                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-success text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}')">
+                                                        {% if s['first_name'] and s['status']=='accepted'%}
+                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-success text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '{{s['medical_his']}}', '{{s['appointment_id']}}')">
                                                                 <br>{{s["start_time"]}}
                                                                 <br>{{s["duration"]}}min
                                                             </a>
                                                         {% else %}
-                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}')">
+                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '', '')">
                                                                 <br>{{s["start_time"]}}
                                                                 <br>{{s["duration"]}}min
                                                             </a>
@@ -472,6 +467,7 @@
                                         <strong id="current_schedule_id" hidden>init</strong>
                                     </div>
                                 </div>
+
                             </div>
                             <!--Start of Schedule Info-->
                             <div class='card mb-4' id='schedule_info' style="height:300px; overflow-y:scroll;">
@@ -498,6 +494,7 @@
                                             <p id="schedule_location">
                                             </p>
                                             <h2 id="selected_schedule" hidden>None</h2>
+                                            <h2 id="selected_appointment" hidden>None</h2>
                                         </div>
 
                                     </div>
@@ -507,6 +504,11 @@
 
                             </div>
                             <!--End of Schedule Info-->
+                            <div class='card col-6 mb-4'>
+                                <textarea style="height:230px; overflow-y:scroll;" id="medical_his_appointment" disabled>
+                                </textarea>
+                                <button class="btn-primary" onclick="diagnosis()" id="diagnosis" disabled>Diagnosis</button>
+                            </div>
 
                         </div>
                     </div>
@@ -598,13 +600,7 @@
         document.getElementById("emergency_contact_accepted").textContent = emergency_contact;
         document.getElementById("appointment-profile_accepted").hidden = false;
         document.getElementById("check_out_button").disabled = false;
-        if (medical_his !== "None") {
-            document.getElementById("medical_his").value = medical_his;
-        }
-        else{
-            document.getElementById("medical_his").value = "";
-        }
-        document.getElementById("medical_his").disabled = false;
+        document.getElementById("medical_his_total").value = medical_his;
 
     }
 
@@ -636,16 +632,24 @@
         document.getElementById("my_schedule").hidden = state;
     }
 
-    function show_schedule_detail(start_time, duration, patient_last_name, patient_first_name, location){
+    function show_schedule_detail(start_time, duration, patient_last_name, patient_first_name, location, medical_his, appointment_id){
         document.getElementById("delete_schedule_button").disabled = false;
         document.getElementById("schedule_detail").hidden = false;
         document.getElementById("schedule_time").textContent = start_time;
         document.getElementById("schedule_duration").textContent = duration;
         if (patient_first_name === "None"){
             document.getElementById("schedule_patient").textContent = "None";
+            document.getElementById("diagnosis").disabled=true;
+            document.getElementById("medical_his_appointment").disabled=true;
+            document.getElementById("medical_his_appointment").value = "";
+            document.getElementById("selected_appointment").textContent = 'None';
         }
         else {
+            document.getElementById("diagnosis").disabled=false;
+            document.getElementById("medical_his_appointment").disabled=false;
+            document.getElementById("medical_his_appointment").value = medical_his;
             document.getElementById("schedule_patient").textContent = patient_last_name + " " + patient_first_name;
+            document.getElementById("selected_appointment").textContent = appointment_id;
         }
         document.getElementById("schedule_location").textContent = location;
         document.getElementById("selected_schedule").textContent = start_time;
@@ -725,16 +729,18 @@
     }
 
     function diagnosis(){
-        const content = document.getElementById("medical_his").value;
-        const patient_id = document.getElementById("current_patient_id_accepted").textContent;
-        console.log(content, patient_id);
+        let content = document.getElementById("medical_his_appointment").value;
+        content = content.replace(/\n/g, JSON.stringify("\n").replace(/"/g, ""));
+        const appointment_id = document.getElementById("selected_appointment").textContent;
+
+        console.log(content, appointment_id);
         if (confirm("Are you sure?")) {
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json;charset-utf-08',
                 dateType: 'json',
                 url: "http://127.0.0.1:5000/doctor/write_medical_his?medical_his=" + content
-                    + '&patient_id=' + patient_id
+                    + '&appointment_id=' + appointment_id
             });
         }
     }

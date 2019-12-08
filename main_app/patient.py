@@ -32,8 +32,8 @@ def send_appointment():
     duration = request.args.get("duration")
     print(request.args)
     db = get_db()
-    db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status) '
-               'VALUES (?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending'))
+    db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status, medical_his) '
+               'VALUES (?, ?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending', ''))
     db.commit()
     return redirect(url_for('patient.show_main'))
 
@@ -49,8 +49,8 @@ def make_appointment_with_current_provider():
     duration = lst[1][:-3].strip()
     print(doctor_id, start_time, duration)
     db = get_db()
-    db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status) '
-               'VALUES (?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending'))
+    db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status, medical_his) '
+               'VALUES (?, ?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending', ''))
     db.commit()
 
     return redirect(url_for('patient.show_main'))
