@@ -455,11 +455,17 @@
                                 <div style="height:300px; overflow-y:scroll;">
                                     <div id="schedule_list" class="list-group">
                                                     {% for s in my_schedule %}
-
-                                                        <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}')">
-                                                            <br>{{s["start_time"]}}
-                                                            <br>{{s["duration"]}}min
-                                                        </a>
+                                                        {% if s['first_name'] %}
+                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-success text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}')">
+                                                                <br>{{s["start_time"]}}
+                                                                <br>{{s["duration"]}}min
+                                                            </a>
+                                                        {% else %}
+                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}')">
+                                                                <br>{{s["start_time"]}}
+                                                                <br>{{s["duration"]}}min
+                                                            </a>
+                                                        {% endif %}
 
                                                     {% endfor %}
                                                     <strong id="current_id" hidden>init</strong>
