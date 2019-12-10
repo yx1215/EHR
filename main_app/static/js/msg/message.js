@@ -10,16 +10,16 @@ function setMessageNumber(n) {
 
 
 function appendMessage(msgObj) {
-    ele = document.createElement("a");
+    const ele = document.createElement("a");
     ele.className = "dropdown-item d-flex align-items-center";
-    elediv = document.createElement("div");
+    const elediv = document.createElement("div");
     if (!msgObj.read){
         elediv.className = "font-weight-bold";
     }
     ele.appendChild(elediv);
 
     function creatChild(elediv, className, textContent){
-        child = document.createElement("div");
+        const child = document.createElement("div");
         child.className = className;
         child.textContent = textContent;
         elediv.appendChild(child);
@@ -34,8 +34,8 @@ function appendMessage(msgObj) {
 
 
 $.getJSON("/auth/api/email", function(data) {
-    $.getJSON("http://localhost:3000/api/msg/"+data.email, function(data1) {
-        setMessageNumber(data1.length)
+    $.getJSON("http://127.0.0.1:3000/api/msg/"+data.email, function(data1) {
+        setMessageNumber(data1.length);
         for (let i of data1){
             appendMessage({text: i.text, read: 0, sender: i.headers.from, time: i.headers.date})
         }

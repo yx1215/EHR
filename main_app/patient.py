@@ -20,7 +20,15 @@ def show_main():
         my_provider_schedule = db.execute("SELECT * FROM schedule WHERE doctor_id=?", (provider["id"], ))
     else:
         my_provider_schedule = None
-    return render_template('/patient.html', my_provider=provider, all_doctors=doctors, my_provider_schedule=my_provider_schedule)
+    medical_his = db.execute("SELECT start_time, medical_his FROM appointment WHERE patient_id=? ORDER BY start_time", (g.user['id'], )).fetchall()
+    medical_his_changed = []
+    for r in medical_his:
+        new_d = {}
+        new_d["start_time"] = r["start_time"]
+        new_d["medical_his"] = r["medical_his"].split("\\n")
+        print(new_d)
+        medical_his_changed.append(new_d)
+    return render_template('./patient.html', my_provider=provider, all_doctors=doctors, my_provider_schedule=my_provider_schedule, medical_his=medical_his_changed)
 
 
 @patient_bp.route("/send_appointment", methods=('POST', ))

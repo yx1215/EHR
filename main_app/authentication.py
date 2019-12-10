@@ -24,7 +24,7 @@ def register():
         if register_type != 'admin' and register_type != 'patient':
             error = 'please choose a correct type of user to register.'
             flash(error)
-            return render_template('/auth/register.html')
+            return render_template('./auth/register.html')
 
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
@@ -37,7 +37,7 @@ def register():
         if repeat_password != password:
             error = "two passwords are not the same."
             flash(error)
-            return render_template('/auth/register.html')
+            return render_template('./auth/register.html')
 
         if register_type == "patient":
             height = request.form["height"]
@@ -138,7 +138,7 @@ def login():
         else:
             error = 'Unknown type of user.'
             flash(error)
-            return render_template('/auth/login.html')
+            return render_template('./auth/login.html')
 
         if user is None:
             error = 'Incorrect username.'
@@ -159,7 +159,7 @@ def login():
 
         flash(error)
 
-    return render_template('/auth/login.html')
+    return render_template('./auth/login.html')
 
 
 @auth_bp.route('/api/email', methods=('GET',"POST"))

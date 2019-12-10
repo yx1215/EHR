@@ -84,9 +84,9 @@ def check_out():
     doctor_id = request.args["doctor_id"]
     patient_id = request.args["patient_id"]
     print(doctor_id, patient_id)
-    # db = get_db()
-    # db.execute("DELETE FROM take_care WHERE doctor_id=? AND patient_id=?", (doctor_id, patient_id))
-    # db.commit()
+    db = get_db()
+    db.execute("DELETE FROM take_care WHERE doctor_id=? AND patient_id=?", (doctor_id, patient_id))
+    db.commit()
 
     return redirect(url_for('doctor.show_main'))
 

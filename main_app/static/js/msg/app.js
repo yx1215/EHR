@@ -47,7 +47,7 @@ $(function () {
         Prism.highlightAll();
     });
 
-    const socket = io('http://localhost:3000');
+    const socket = io('http://127.0.0.1:3000');
 
     // var setMailAddress = function (id) {
     //     localStorage.setItem('shortid', id);
@@ -60,14 +60,7 @@ $(function () {
     // });
 
     socket.on('connect', function () {
-        // if (('localStorage' in window)) {
-        //     var shortid = localStorage.getItem('shortid');
-        //     if (!shortid) {
-        //         socket.emit('request shortid', true);
-        //     } else {
-        //         socket.emit('set shortid', shortid);
-        //     }
-        // }
+
     });
 
     // socket.on('shortid', function (id) {
@@ -134,10 +127,10 @@ $(function () {
     // const usernamebtn = document.querySelector("#setusernamebutton");
 
 
-    $.getJSON( "http://localhost:5000/auth/api/email", function( data ) {
-        const email = data.email
-        username = email
-        socket.emit('set_username', email)
+    $.getJSON( "http://127.0.0.1:5000/auth/api/email", function( data ) {
+        const email = data.email;
+        username = email;
+        socket.emit('set_username', email);
         $("#usernametext").text(email)
     });
 

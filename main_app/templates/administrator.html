@@ -18,7 +18,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -57,25 +57,6 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item" hidden>
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -121,56 +102,6 @@
                                 </form>
                             </div>
                         </li>
-
-                        <!-- Nav Item - Alerts -->
-<!--                        <li class="nav-item dropdown no-arrow mx-1">-->
-<!--                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                <i class="fas fa-bell fa-fw"></i>-->
-<!--                                &lt;!&ndash; Counter - Alerts &ndash;&gt;-->
-<!--                                <span class="badge badge-danger badge-counter">3+</span>-->
-<!--                            </a>-->
-<!--                            &lt;!&ndash; Dropdown - Alerts &ndash;&gt;-->
-<!--                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in" aria-labelledby="alertsDropdown">-->
-<!--                                <h6 class="dropdown-header">-->
-<!--                                    Alerts Center-->
-<!--                                </h6>-->
-<!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--                                    <div class="mr-3">-->
-<!--                                        <div class="icon-circle bg-primary">-->
-<!--                                            <i class="fas fa-file-alt text-white"></i>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div>-->
-<!--                                        <div class="small text-gray-500">December 12, 2019</div>-->
-<!--                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>-->
-<!--                                    </div>-->
-<!--                                </a>-->
-<!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--                                    <div class="mr-3">-->
-<!--                                        <div class="icon-circle bg-success">-->
-<!--                                            <i class="fas fa-donate text-white"></i>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div>-->
-<!--                                        <div class="small text-gray-500">December 7, 2019</div>-->
-<!--                                        $290.29 has been deposited into your account!-->
-<!--                                    </div>-->
-<!--                                </a>-->
-<!--                                <a class="dropdown-item d-flex align-items-center" href="#">-->
-<!--                                    <div class="mr-3">-->
-<!--                                        <div class="icon-circle bg-warning">-->
-<!--                                            <i class="fas fa-exclamation-triangle text-white"></i>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div>-->
-<!--                                        <div class="small text-gray-500">December 2, 2019</div>-->
-<!--                                        Spending Alert: We've noticed unusually high spending for your account.-->
-<!--                                    </div>-->
-<!--                                </a>-->
-<!--                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>-->
-<!--                            </div>-->
-<!--                        </li>-->
-
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -211,16 +142,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
+
                                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
                                 </a>
@@ -299,7 +221,7 @@
                                             <input type="password" class="form-control form-control-user" id="repeat_password" name="repeat_password" placeholder="Repeat Password" required>
                                         </div>
                                     </div>
-                                    <input type='submit' value='Register' class="btn btn-primary btn-user btn-block">
+                                    <input type='submit' value='Add Doctor' class="btn btn-primary btn-user btn-block">
                                     <hr>
                                 </form>
                             </div>
@@ -311,19 +233,6 @@
                             <div class="card-header py-2 mb-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Doctor List</h6>
                             </div>
-                            <!-- Start of Doctor List Search-->
-                            <div class='card mb-4'>
-                                <form class="navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                             <!--End of Doctor List Search-->
 
                             <div class="card-group" style="height:300px">
@@ -332,7 +241,7 @@
                                     <div id="" style="height:300px; overflow-y:scroll;">
                                         <div id="doctor_list" class="list-group">
                                             {% for doctor in all_doctors %}
-                                            <a class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}')">
+                                            <a id="doctor_{{ doctor['id'] }}" class="list-group-item list-group-item-action" style="font-size: 12px" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}')">
                                                 {{doctor["last_name"] + " " + doctor["first_name"]}}
                                             </a>
                                             {% endfor %}
@@ -362,42 +271,6 @@
                                                 <p><strong>Introduction: </strong> </p>
                                                 <p id="show_intro">
                                                 </p>
-                                                <figure>
-                                                    <figcaption class="ratings">
-                                                        <p>Ratings
-                                                            <a href="#">
-                                                                <span class="fa fa-star"></span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <span class="fa fa-star"></span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <span class="fa fa-star"></span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <span class="fa fa-star"></span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <span class="fa fa-star-o"></span>
-                                                            </a>
-                                                        </p>
-                                                    </figcaption>
-                                                </figure>
-                                                <div class="divider text-center">
-                                                    <div class="row">
-                                                        <div class="btn-group dropup btn-block">
-                                                            <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Contact our Doctor </button>
-                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="caret"></span>
-                                                            <span class="sr-only">Toggle Dropdown</span>
-                                                          </button>
-                                                            <ul class="dropdown-menu text-left" role="menu">
-                                                                <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
-                                                                <li><a href="#"><span class="fa fa-envelope pull-right"></span> Make a Phone Call </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
 
                                         </div>
@@ -419,9 +292,6 @@
                             </div>
                         </footer>
                         <!-- End of Footer -->
-
-
-
 
                     </div>
                 </div>
@@ -456,6 +326,7 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="/static/vendor/jquery/jquery.min.js"></script>
         <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -465,13 +336,6 @@
         <!-- Custom scripts for all pages-->
         <script src="/static/js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="/static/vendor/chart.js/Chart.min.js"></script>
-
-        <!-- Page level custom scripts -->
-        <script src="/static/js/demo/chart-area-demo.js"></script>
-        <script src="/static/js/demo/chart-pie-demo.js"></script>
-
         <script src="/static/js/msg/message.js"></script>
     </div>
 </body>
@@ -479,7 +343,7 @@
     function delete_doctor(){
         const doctor_id = document.getElementById("current_id").textContent;
         console.log("id is:", doctor_id);
-        if (doctor_id != "init"){
+        if (doctor_id !== "init"){
             if (confirm("Are you sure?")){
                 $.ajax({
                 type: 'POST',
@@ -491,7 +355,7 @@
         }
     }
 
-    function view_profile(id, name, field, introduction, rate){
+    function view_profile(id, name, field, introduction){
         document.getElementById("current_id").textContent = id;
         document.getElementById("show_name").textContent = name;
         document.getElementById("show_field").textContent = field;
