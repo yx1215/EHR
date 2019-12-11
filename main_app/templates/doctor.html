@@ -175,9 +175,7 @@
                             <!--Start of Doctor Info-->
                             <div class='card mb-4' id='appointment-info' style="height:300px; overflow-y:scroll;">
                                 <div class="btn-group">
-                                    <form>
-                                        <button id="accept" class="btn-warning" type="submit" onclick="accept_appointment()" disabled>Accept appointment</button>
-                                    </form>
+                                    <button id="accept" class="btn-warning" onclick="accept_appointment()" disabled>Accept appointment</button>
                                 </div>
 
                                 <!--Start of Doctor Profile-->
@@ -264,7 +262,7 @@
                         <br>
                         <!--End of Appointment Interface-->
 
-                
+
                     <!--Start of Viewing Current Patient-->
                     <div class='card mb-3' id="current_patient" hidden>
                         <div class="card-header py-2 mb-3">
@@ -292,9 +290,7 @@
                             <!--Start of Doctor Info-->
                             <div class='card col-6 mb-4' id='doctor_information' style="height:300px; overflow-y:scroll;">
                                 <div class="btn-group">
-                                    <form id="delete_form">
-                                        <button id="check_out_button" class="btn-warning" type="submit" onclick="check_out()" disabled>Check out</button>
-                                    </form>
+                                    <button id="check_out_button" class="btn-warning" onclick="check_out()" disabled>Check out</button>
                                 </div>
 
                                 <!--Start of Doctor Profile-->
@@ -371,9 +367,7 @@
                             <!--Start of Schedule Info-->
                             <div class='card mb-4' id='schedule_info' style="height:300px; overflow-y:scroll;">
                                 <div class="btn-group">
-                                    <form>
-                                        <button id="delete_schedule_button" class="btn-warning" type="submit" onclick="delete_schedule()" disabled>Delete schedule</button>
-                                    </form>
+                                    <button id="delete_schedule_button" class="btn-warning" onclick="delete_schedule()" disabled>Delete schedule</button>
                                 </div>
 
                                 <!--Start of Schedule Detail-->
@@ -550,37 +544,25 @@
     function delete_schedule(){
         const start_time = document.getElementById("selected_schedule").textContent;
         const doctor_id = "{{g.user['id']}}";
-        console.log(start_time, doctor_id);
         if (start_time !== "None"){
             if (confirm("Are you sure?")){
-                $.ajax({
-                type: 'POST',
-                contentType:'application/json;charset-utf-08',
-                dateType: 'json',
-                url: "http://127.0.0.1:5000/doctor/delete_schedule?"
+                location.href = "http://127.0.0.1:5000/doctor/delete_schedule?"
                     + '&doctor_id='+ doctor_id
-                    + '&start_time='+ start_time
-            });
+                    + '&start_time='+ start_time;
             }
         }
     }
+
     function accept_appointment() {
         const patient_id = document.getElementById("current_patient_id_pending").textContent;
         const start_time = document.getElementById("start_time_pending").textContent;
         const doctor_id = "{{g.user['id']}}";
         console.log("start_time:", start_time);
-
-
-        if (patient_id !== "init"){
-            if (confirm("Are you sure?")){
-                $.ajax({
-                type: 'POST',
-                contentType:'application/json;charset-utf-08',
-                dateType: 'json',
-                url: "http://127.0.0.1:5000/doctor/accept_appointment?patient_id="+patient_id
+        if (patient_id !== "init") {
+            if (confirm("Are you sure?")) {
+                location.href = "http://127.0.0.1:5000/doctor/accept_appointment?patient_id="+patient_id
                     + '&doctor_id='+ doctor_id
-                    + '&start_time='+ start_time
-            });
+                    + '&start_time='+ start_time;
             }
         }
     }
@@ -589,17 +571,11 @@
         const time = document.getElementById("appointment_date_new").value;
         const duration = document.getElementById("duration_new").value;
         const doctor_id = "{{g.user['id']}}";
-        console.log(doctor_id);
-        if (time !== "" && duration !== "None"){
+        if (time !== "" && duration !== "None") {
             if (confirm("Are you sure?")){
-                $.ajax({
-                type: 'POST',
-                contentType:'application/json;charset-utf-08',
-                dateType: 'json',
-                url: "http://127.0.0.1:5000/doctor/set_schedule?duration="+duration
+                location.href = "http://127.0.0.1:5000/doctor/set_schedule?duration="+duration
                     + '&doctor_id='+ doctor_id
-                    + '&start_time='+ time
-            });
+                    + '&start_time='+ time;
             }
         }
     }
@@ -609,13 +585,8 @@
         const doctor_id = "{{g.user['id']}}";
         if (patient_id !== "init") {
             if (confirm("Are you sure?")) {
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json;charset-utf-08',
-                    dateType: 'json',
-                    url: "http://127.0.0.1:5000/doctor/check_out?patient_id=" + patient_id
-                        + '&doctor_id=' + doctor_id
-                });
+                location.href = "http://127.0.0.1:5000/doctor/check_out?patient_id=" + patient_id
+                        + '&doctor_id=' + doctor_id;
             }
         }
     }
@@ -624,18 +595,12 @@
         let content = document.getElementById("medical_his_appointment").value;
         content = content.replace(/\n/g, JSON.stringify("\n").replace(/"/g, ""));
         const appointment_id = document.getElementById("selected_appointment").textContent;
-
-        console.log(content, appointment_id);
         if (confirm("Are you sure?")) {
-            $.ajax({
-                type: 'POST',
-                contentType: 'application/json;charset-utf-08',
-                dateType: 'json',
-                url: "http://127.0.0.1:5000/doctor/write_medical_his?medical_his=" + content
-                    + '&appointment_id=' + appointment_id
-            });
+            location.href = "http://127.0.0.1:5000/doctor/write_medical_his?medical_his=" + content
+                    + '&appointment_id=' + appointment_id;
         }
     }
+
 </script>
 {% endblock %}
 

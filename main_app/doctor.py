@@ -35,7 +35,7 @@ def show_main():
     return render_template('./doctor.html', pending=pending_appointment, my_patient=my_patient, my_schedule=my_schedule, medical_his_d=history_d)
 
 
-@doctor_bp.route("/accept_appointment", methods=('POST', ))
+@doctor_bp.route("/accept_appointment", methods=('POST', 'GET'))
 @login_required_doctor
 def accept_appointment():
     patient_id = request.args["patient_id"]
@@ -51,7 +51,7 @@ def accept_appointment():
     return redirect(url_for('doctor.show_main'))
 
 
-@doctor_bp.route("/set_schedule", methods=('POST', ))
+@doctor_bp.route("/set_schedule", methods=('POST', 'GET'))
 @login_required_doctor
 def set_schedule():
     doctor_id = request.args["doctor_id"]
@@ -66,7 +66,7 @@ def set_schedule():
     return redirect(url_for('doctor.show_main'))
 
 
-@doctor_bp.route("/delete_schedule", methods=('POST', ))
+@doctor_bp.route("/delete_schedule", methods=('POST', 'GET'))
 @login_required_doctor
 def delete_schedule():
     doctor_id = request.args["doctor_id"]
@@ -80,7 +80,7 @@ def delete_schedule():
     return redirect(url_for('doctor.show_main'))
 
 
-@doctor_bp.route("/check_out", methods=('POST', ))
+@doctor_bp.route("/check_out", methods=('POST', 'GET'))
 @login_required_doctor
 def check_out():
     doctor_id = request.args["doctor_id"]
@@ -93,7 +93,7 @@ def check_out():
     return redirect(url_for('doctor.show_main'))
 
 
-@doctor_bp.route("/write_medical_his", methods=('POST', ))
+@doctor_bp.route("/write_medical_his", methods=('POST', 'GET'))
 @login_required_doctor
 def write_medical_his():
     appointment_id = request.args["appointment_id"]

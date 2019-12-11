@@ -16,8 +16,7 @@ CREATE TABLE patients (
     height TEXT NOT NULL,
     weight TEXT NOT NULL,
     data_of_birth TEXT NOT NULL,
-    emergency_contacts TEXT,
-    medical_his TEXT
+    emergency_contacts TEXT
 );
 
 CREATE TABLE doctors (
@@ -72,11 +71,9 @@ CREATE TABLE appointment (
     duration TEXT NOT NULL,
     location VARCHAR(8) NOT NULL,
     status VARCHAR(10) check ( status='pending' or status='accepted' ),
+    medical_his TEXT,
     FOREIGN KEY (doctor_id) REFERENCES doctors (id) on delete cascade,
     FOREIGN KEY (patient_id) REFERENCES patients (id) on delete cascade
 
 );
-
-
-
 

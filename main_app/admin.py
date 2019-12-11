@@ -31,7 +31,7 @@ def get_doctor(id):
 @login_required_admin
 def show_main():
     doctors = get_all_doctors()
-    return render_template('/administrator.html', all_doctors=doctors)
+    return render_template('./administrator.html', all_doctors=doctors)
 
 
 @admin_bp.route('/add_doctor', methods=('GET', 'POST'))
@@ -94,11 +94,10 @@ def add_doctor():
     return redirect(url_for('admin.show_main'))
 
 
-@admin_bp.route('/delete_doctor', methods=("POST", ))
+@admin_bp.route('/delete_doctor', methods=("POST", "GET"))
 @login_required_admin
 def delete_doctor():
     doctor_id = request.args.get("id")
-    print(doctor_id)
     db = get_db()
     db.execute('DELETE FROM doctors WHERE id = ?', (doctor_id, ))
     db.commit()

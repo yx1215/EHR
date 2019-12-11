@@ -241,9 +241,7 @@
                                 <!--Start of Doctor Info-->
                                 <div class='card w-75 mb-4' id='doctor_information' style="height:300px; overflow-y:scroll;">
                                     <div class="btn-group">
-                                        <form id="delete_form">
-                                        <button id="delete_doctor_button" class="btn-warning" type="submit" onclick="delete_doctor()" disabled>Delete</button>
-                                        </form>
+                                        <button id="delete_doctor_button" class="btn-warning" onclick="delete_doctor()" disabled>Delete</button>
                                     </div>
 
                                     <!--Start of Doctor Profile-->
@@ -330,13 +328,9 @@
         const doctor_id = document.getElementById("current_id").textContent;
         console.log("id is:", doctor_id);
         if (doctor_id !== "init"){
+
             if (confirm("Are you sure?")){
-                $.ajax({
-                type: 'POST',
-                contentType:'application/json;charset-utf-08',
-                dateType: 'json',
-                url: "http://127.0.0.1:5000/admin/delete_doctor?id="+doctor_id,
-            });
+                location.href = "http://127.0.0.1:5000/admin/delete_doctor?id="+doctor_id;
             }
         }
     }

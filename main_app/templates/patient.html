@@ -579,22 +579,12 @@
         const patient_id = "{{ g.user['id'] }}";
         const start_time = document.getElementById("appointment_date_new").value;
         const duration = document.getElementById("duration_new").value;
-        console.log("patient_id", patient_id);
-        console.log("id is:", doctor_id);
-        console.log("start_time:", start_time);
-        console.log("duration:", duration);
-
         if (doctor_id !== "init" && start_time !== '' && duration !== 'None') {
-            if (confirm("Are you sure?")) {
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json;charset-utf-08',
-                    dateType: 'json',
-                    url: "http://127.0.0.1:5000/patient/send_appointment?doctor_id=" + doctor_id +
+            if (confirm("Are you sure?")){
+                location.href = "http://127.0.0.1:5000/patient/send_appointment?doctor_id=" + doctor_id +
                         '&patient_id=' + patient_id +
                         '&start_time=' + start_time +
                         '&duration=' + duration
-                });
             }
         }
     }
@@ -672,15 +662,11 @@
         const doctor_id = "{{my_provider['id']}}";
         if (schedule_duration !== 'init') {
             if (confirm("Are you sure?")) {
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json;charset-utf-08',
-                    dateType: 'json',
-                    url: "http://127.0.0.1:5000/patient/make_appointment_with_current_provider?doctor_id=" + doctor_id +
+                location.href = "http://127.0.0.1:5000/patient/make_appointment_with_current_provider?doctor_id=" + doctor_id +
                         '&schedule_duration=' + schedule_duration
-                });
             }
         }
+
     }
 
 
