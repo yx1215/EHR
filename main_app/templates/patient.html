@@ -685,6 +685,28 @@
 
 
 </script>
+
+<script type="text/javascript">
+    let usr = {
+        fn:"{{ g.user["first_name"] }}",
+        ln:"{{ g.user["last_name"] }}",
+        email:"{{ g.user["email"] }}"
+    };
+
+    $("#messagesDropdown > i").click(function(){
+        $.getJSON("http://127.0.0.1:5000/auth/api/emergency", function( doctor ) {
+            $.post( "http://127.0.0.1:3000/api/emergency", {doctors: doctor.doctors, user:usr})
+                .done(function( data ) {
+                console.log(data);
+  });
+        });
+    })
+
+
+
+
+</script>
+
 {% endblock %}
 
 </html>

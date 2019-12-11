@@ -170,6 +170,19 @@ def api_email():
         return jsonify({"email":""})
 
 
+@auth_bp.route('/api/emergency', methods=('GET',"POST"))
+def api_em():
+    db = get_db()
+    user = db.execute(
+                'SELECT email FROM doctors'
+            )
+    data = []
+    rows = user.fetchall() 
+    for row in rows:
+        data.extend([x for x in row])
+    return jsonify({"doctors":data}) 
+
+
 @auth_bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
