@@ -57,7 +57,7 @@ CREATE TABLE take_care (
 
 CREATE TABLE schedule (
     doctor_id INTEGER,
-    start_time TEXT NOT NULL,
+    start_time TIMESTAMP NOT NULL,
     duration INTEGER NOT NULL check ( duration=30 or duration=60 ),
     occupied BOOLEAN NOT NULL,
     PRIMARY KEY (doctor_id, start_time),
@@ -68,7 +68,7 @@ CREATE TABLE appointment (
     appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,
     doctor_id INTEGER NOT NULL,
     patient_id INTEGER NOT NULL,
-    start_time TEXT NOT NULL,
+    start_time TIMESTAMP NOT NULL,
     duration TEXT NOT NULL,
     location VARCHAR(8) NOT NULL,
     status VARCHAR(10) check ( status='pending' or status='accepted' ),

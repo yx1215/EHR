@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 
 <head>
 
     <title>EHR Patient - Dashboard</title>
+<style>
+
+.alert {
+  padding: 20px;
+  background-color: #ff8000;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+</style>
 
 </head>
 
 <body id="page-top">
-
+{% if need_appointment == True %}
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Warning!</strong> Please make an appointment with doctor since you haven't done it for 30 days.
+    </div>
+{% endif %}
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -123,6 +152,12 @@
                                 </div>
                                 <a class="dropdown-item text-center small text-gray-500" href="./message">Read More Messages</a>
                             </div>
+                        </li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - warning -->
+                            </a>
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -440,21 +475,7 @@
                                                         <p><strong>Introduction: </strong> </p>
                                                         <p id="show_intro">
                                                         </p>
-                                                        <div class="divider text-center">
-                                                            <div class="row">
-                                                                <div class="btn-group dropup btn-sm">
-                                                                    <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Contact our Doctor </button>
-                                                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="caret"></span>
-                                                            <span class="sr-only">Toggle Dropdown</span>
-                                                          </button>
-                                                                    <ul class="dropdown-menu text-left" role="menu">
-                                                                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
-                                                                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Make a Phone Call </a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
                                                     </div>
 
                                                 </div>
@@ -543,7 +564,7 @@
         document.getElementById("show_intro").textContent = introduction;
         document.getElementById("profile").hidden = false;
         document.getElementById("make-appointment-button").disabled = false;
-        document.getElementById("appointment_date_new").value = time;
+        document.getElementById("appointment_date_new").value = time.replace(' ', 'T');
         document.getElementById("duration_new").value = duration;
         document.getElementById("input_doctor_new").value = name;
 
@@ -612,14 +633,14 @@
 
     function search() {
         const d = document.getElementById("input_doctor_new").value;
-        const time = document.getElementById("appointment_date_new").value;
+        const time = document.getElementById("appointment_date_new").value.replace('T', ' ');
         const duration = document.getElementById("duration_new").value;
         console.log("here", d, time, duration);
 
         {% for doctor in all_doctors %}
         {% if doctor['occupied'] == False %}
         console.log("{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}", "{{doctor['start_time']}}", "{{doctor['duration']}}");
-            if (d == "{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}" && time == "{{doctor['start_time']}}"&& duration == "{{doctor['duration']}}"){
+            if (d === "{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}" && time == "{{doctor['start_time']}}"&& duration == "{{doctor['duration']}}"){
                 console.log("here2", d, time, duration);
                 document.getElementById("{{doctor['last_name']}} {{doctor['first_name']}} {{doctor['start_time']}}:{{doctor['duration']}}min").hidden = false;
 
@@ -657,6 +678,8 @@
             }
         }
     }
+
+
 </script>
 {% endblock %}
 

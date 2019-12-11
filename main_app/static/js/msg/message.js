@@ -39,20 +39,8 @@ $.getJSON("/auth/api/email", function(data) {
         for (let i of data1){
             appendMessage({text: i.text, read: 0, sender: i.headers.from, time: i.headers.date})
         }
-
-
-
-        // console.log(data1)
     });
-
-
-    // console.log(data)
 });
-
-//
-// appendMessage({text: "fewr", read: 1, sender: "fere", time: "58m"})
-// appendMessage({text: "fefewrfefwr", read: 0, sender: "frefreerfre", time: "5444448m"})
-
 
 $(".dropdown-item.d-flex.align-items-center").on('click', function (event) {
     console.log(event.currentTarget)

@@ -27,12 +27,12 @@ def show_main():
     history_d = {}
     for r in medical_his:
         try:
-            history_d[r["patient_id"]] = history_d[r["patient_id"]] + "\\n\\n" + r["start_time"] + "\\n" + r["medical_his"]
+            history_d[r["patient_id"]] = history_d[r["patient_id"]] + "\\n\\n" + str(r["start_time"]) + "\\n" + r["medical_his"]
 
         except:
-            history_d[r["patient_id"]] = r["start_time"] + "\\n" + r["medical_his"]
+            history_d[r["patient_id"]] = str(r["start_time"]) + "\\n" + r["medical_his"]
     print(history_d)
-    return render_template('/doctor.html', pending=pending_appointment, my_patient=my_patient, my_schedule=my_schedule, medical_his_d=history_d)
+    return render_template('./doctor.html', pending=pending_appointment, my_patient=my_patient, my_schedule=my_schedule, medical_his_d=history_d)
 
 
 @doctor_bp.route("/accept_appointment", methods=('POST', ))
@@ -55,7 +55,8 @@ def accept_appointment():
 @login_required_doctor
 def set_schedule():
     doctor_id = request.args["doctor_id"]
-    start_time = request.args["start_time"]
+    start_time = request.args["start_time"].split("T")
+    start_time = start_time[0] + " " + start_time[1] + ":00"
     duration = request.args["duration"]
     print(doctor_id, start_time, duration)
     db = get_db()
@@ -71,6 +72,7 @@ def delete_schedule():
     doctor_id = request.args["doctor_id"]
     start_time = request.args["start_time"]
     print(doctor_id, start_time)
+
     db = get_db()
     db.execute("DELETE FROM schedule WHERE start_time=? AND doctor_id=?", (start_time, doctor_id))
     db.commit()
