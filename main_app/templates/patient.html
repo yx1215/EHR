@@ -214,7 +214,7 @@
                                                 <div class="tab-content ml-1" id="myTabContent">
                                                     <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
 
-
+                                                        <form method="post" action="{{ url_for('patient.edit_info') }}">
                                                         <div class="row">
                                                             <div class="col-sm-3 col-md-2 col-5">
                                                                 <label style="font-weight:bold;">First Name</label>
@@ -243,7 +243,7 @@
                                                                 {{g.user['data_of_birth']}}
                                                             </div>
                                                         </div>
-                                                        <hr />
+                                                        <hr/>
 
 
                                                         <div class="row">
@@ -260,7 +260,7 @@
                                                                 <label style="font-weight:bold;">Weight</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                {{g.user['weight']}}
+                                                                <input name="weight" value="{{g.user['weight']}}">
                                                             </div>
                                                         </div>
                                                         <hr />
@@ -269,7 +269,7 @@
                                                                 <label style="font-weight:bold;">Height</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                {{g.user['height']}}
+                                                                <input name="height" value="{{g.user['height']}}">
                                                             </div>
                                                         </div>
                                                         <hr />
@@ -279,10 +279,14 @@
                                                                 <label style="font-weight:bold;">Emergency Contact</label>
                                                             </div>
                                                             <div class="col-md-8 col-6">
-                                                                {{g.user['emergency_contacts']}}
+                                                                <input name="emergency_contacts" value="{{g.user['emergency_contacts']}}">
                                                             </div>
                                                         </div>
-                                                        <hr />
+                                                        <hr/>
+                                                        <div>
+                                                            <input type="submit" value="Edit" class="col-2 btn btn-primary btn-user btn-block">
+                                                        </div>
+                                                        </form>
 
                                                     </div>
                                                     <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">

@@ -43,6 +43,19 @@ def show_main():
                            need_appointment=need_appointment)
 
 
+@patient_bp.route('/edit_info', methods=('POST', ))
+@login_required_patient
+def edit_info():
+    weight = request.form["weight"]
+    height = request.form["height"]
+    emergency_contacts = request.form["emergency_contacts"]
+    db = get_db()
+    db.execute('UPDATE patients SET weight=?, height=?, emergency_contacts=? WHERE id=?',
+               (weight, height, emergency_contacts, g.user["id"]))
+    db.commit()
+    return redirect(url_for('patient.show_main'))
+
+
 @patient_bp.route("/send_appointment", methods=('POST', ))
 @login_required_patient
 def send_appointment():
