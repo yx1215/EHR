@@ -13,6 +13,46 @@ SECRET_KEY = generate_password_hash('12345')
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 
+@auth_bp.route("/forget_password", methods=('POST', 'GET'))
+def forget_password():
+    if request.method == "POST":
+        user_type = request.form["user_type"]
+        email = request.form["email"]
+        password = request.form["password"]
+        repeat_password = request.form["repeated_password"]
+        db = get_db()
+        error = None
+
+        if user_type == 'admin':
+            user = db.execute('SELECT * FROM administrators WHERE email=?', (email, )).fetchone()
+        elif user_type == "patient":
+            user = db.execute("SELECT * FROM patients WHERE email=?", (email, )).fetchone()
+        elif user_type == 'doctor':
+            user = db.execute("SELECT * FROM doctors WHERE email=?", (email, )).fetchone()
+        else:
+            flash("Unknown type {}".format(user_type))
+            return render_template('./auth/forgot-password.html')
+
+        if user is None:
+            error = "Wrong email, try again."
+        elif password != repeat_password:
+            error = "Two passwords are not the same."
+
+        if error is None:
+            password_hash = generate_password_hash(password)
+            if user_type == "admin":
+                db.execute('UPDATE administrators SET password=? WHERE email=?', (password_hash, email))
+            elif user_type == "patient":
+                db.execute('UPDATE patients SET password=? WHERE email=?', (password_hash, email))
+            else:
+                db.execute('UPDATE doctors SET password=? WHERE email=?', (password_hash, email))
+            db.commit()
+            flash('Successfully changed password.')
+            return redirect(url_for('auth.login'))
+        flash(error)
+    return render_template("./auth/forgot-password.html")
+
+
 @auth_bp.route("/register", methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':

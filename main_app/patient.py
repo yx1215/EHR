@@ -1,8 +1,6 @@
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
-from werkzeug.exceptions import abort
-from werkzeug.security import generate_password_hash
 
 from main_app.authentication import login_required_patient
 from main_app.database import get_db
