@@ -56,7 +56,7 @@ def edit_info():
     return redirect(url_for('patient.show_main'))
 
 
-@patient_bp.route("/send_appointment", methods=('POST', ))
+@patient_bp.route("/send_appointment", methods=('POST', 'GET'))
 @login_required_patient
 def send_appointment():
     doctor_id = request.args.get("doctor_id")
@@ -64,15 +64,23 @@ def send_appointment():
     start_time = request.args.get("start_time").split('T')
     start_time = start_time[0] + " " + start_time[1]
     duration = request.args.get("duration")
-    print(start_time)
+
     db = get_db()
-    db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status, medical_his) '
-               'VALUES (?, ?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending', ''))
-    db.commit()
+    error = None
+    if db.execute("SELECT * FROM appointment WHERE doctor_id=? AND patient_id=? AND start_time=? AND duration=?",
+                  (doctor_id, patient_id, start_time, duration)).fetchone() is not None:
+        error = "There is a pending patient for the time slot, please wait for the doctor to accept."
+    if error is None:
+        db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status, medical_his) '
+                   'VALUES (?, ?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending', ''))
+        db.commit()
+
+        return redirect(url_for('patient.show_main'))
+    flash(error)
     return redirect(url_for('patient.show_main'))
 
 
-@patient_bp.route("/make_appointment_with_current_provider", methods=('POST', ))
+@patient_bp.route("/make_appointment_with_current_provider", methods=('POST', 'GET'))
 @login_required_patient
 def make_appointment_with_current_provider():
     doctor_id = request.args.get("doctor_id")
@@ -81,12 +89,18 @@ def make_appointment_with_current_provider():
     lst = schedule_duration.strip().split(",")
     start_time = lst[0].strip()
     duration = lst[1][:-3].strip()
-    print(doctor_id, start_time, duration)
     db = get_db()
-    db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status, medical_his) '
-               'VALUES (?, ?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending', ''))
-    db.commit()
+    error = None
+    if db.execute("SELECT * FROM appointment WHERE doctor_id=? AND patient_id=? AND start_time=? AND duration=?",
+                  (doctor_id, patient_id, start_time, duration)).fetchone() is not None:
+        error = "There is a pending patient for the time slot, please wait for the doctor to accept."
+    if error is None:
+        db.execute('INSERT INTO appointment (doctor_id, patient_id, start_time, duration, location, status, medical_his) '
+                   'VALUES (?, ?, ?, ?, ?, ?, ?)', (doctor_id, patient_id, start_time, duration, 'not decided', 'pending', ''))
+        db.commit()
 
+        return redirect(url_for('patient.show_main'))
+    flash(error)
     return redirect(url_for('patient.show_main'))
 
 
