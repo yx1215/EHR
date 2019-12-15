@@ -345,18 +345,29 @@
                                 <div style="height:300px; overflow-y:scroll;">
                                     <div id="schedule_list" class="list-group">
                                                     {% for s in my_schedule %}
-                                                        {% if s['first_name'] and s['status']=='accepted'%}
-                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-success text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '{{s['medical_his']}}', '{{s['appointment_id']}}')">
+                                                        {% if s['first_name'] %}
+                                                            {% if s['status']=='accepted' %}
+                                                                <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-secondary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '{{s['medical_his']}}', '{{s['appointment_id']}}', '{{ s['status'] }}')">
+                                                                    <br>{{s["start_time"]}}
+                                                                    <br>{{s["duration"]}}min
+                                                                </a>
+                                                            {% elif s['status']=='finished' %}
+                                                                <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-success text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '{{s['medical_his']}}', '{{s['appointment_id']}}', '{{ s['status'] }}')">
+                                                                    <br>{{s["start_time"]}}
+                                                                    <br>{{s["duration"]}}min
+                                                                </a>
+                                                            {% else %}
+                                                                <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '', '', '{{ s['status'] }}')">
                                                                 <br>{{s["start_time"]}}
                                                                 <br>{{s["duration"]}}min
                                                             </a>
+                                                            {% endif %}
                                                         {% else %}
-                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '', '')">
+                                                            <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '', '', '{{ s['status'] }}')">
                                                                 <br>{{s["start_time"]}}
                                                                 <br>{{s["duration"]}}min
                                                             </a>
                                                         {% endif %}
-
                                                     {% endfor %}
                                                     <strong id="current_id" hidden>init</strong>
                                         <strong id="current_schedule_id" hidden>init</strong>
@@ -368,6 +379,7 @@
                             <div class='card mb-4' id='schedule_info' style="height:300px; overflow-y:scroll;">
                                 <div class="btn-group">
                                     <button id="delete_schedule_button" class="btn-warning" onclick="delete_schedule()" disabled>Delete schedule</button>
+                                    <button id="finish_appointment_button" class="btn-primary" onclick="finish_appointment()" disabled>Finish appointment</button>
                                 </div>
 
                                 <!--Start of Schedule Detail-->
@@ -518,12 +530,13 @@
         document.getElementById("my_schedule").hidden = state;
     }
 
-    function show_schedule_detail(start_time, duration, patient_last_name, patient_first_name, location, medical_his, appointment_id){
+    function show_schedule_detail(start_time, duration, patient_last_name, patient_first_name, location, medical_his, appointment_id, status){
         document.getElementById("delete_schedule_button").disabled = false;
         document.getElementById("schedule_detail").hidden = false;
         document.getElementById("schedule_time").textContent = start_time;
         document.getElementById("schedule_duration").textContent = duration;
         if (patient_first_name === "None"){
+            document.getElementById("finish_appointment_button").disabled=true;
             document.getElementById("schedule_patient").textContent = "None";
             document.getElementById("diagnosis").disabled=true;
             document.getElementById("medical_his_appointment").disabled=true;
@@ -531,6 +544,13 @@
             document.getElementById("selected_appointment").textContent = 'None';
         }
         else {
+            if (status === 'accepted') {
+                document.getElementById("finish_appointment_button").disabled = false;
+
+            }
+            else {
+                document.getElementById("finish_appointment_button").disabled = true;
+            }
             document.getElementById("diagnosis").disabled=false;
             document.getElementById("medical_his_appointment").disabled=false;
             document.getElementById("medical_his_appointment").value = medical_his;
@@ -601,6 +621,14 @@
         }
     }
 
+    function finish_appointment(){
+        const start_time = document.getElementById("selected_schedule").textContent;
+        const doctor_id = '{{ g.user['id'] }}';
+        if (confirm("Are you sure?")) {
+            location.href = '{{ url_for('doctor.finish_appointment') }}' + '?start_time=' + start_time
+                + '&doctor_id=' + doctor_id;
+        }
+    }
 </script>
 {% endblock %}
 

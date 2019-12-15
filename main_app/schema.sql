@@ -70,8 +70,9 @@ CREATE TABLE appointment (
     start_time TIMESTAMP NOT NULL,
     duration TEXT NOT NULL,
     location VARCHAR(8) NOT NULL,
-    status VARCHAR(10) check ( status='pending' or status='accepted' ),
+    status VARCHAR(10) check ( status='pending' or status='accepted' or status='finished'),
     medical_his TEXT,
+    comments TEXT,
     FOREIGN KEY (doctor_id) REFERENCES doctors (id) on delete cascade,
     FOREIGN KEY (patient_id) REFERENCES patients (id) on delete cascade
 

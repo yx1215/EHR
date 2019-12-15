@@ -85,6 +85,19 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>My Schedule</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" onclick="show_past_schedule()">My past schedule</a>
+                        <a class="collapse-item" onclick="show_upcoming_schedule()">My upcoming schedule</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -447,9 +460,9 @@
                                         <div class='card col-3 mb-4'>
                                             <div id="" style="height:300px; overflow-y:scroll;">
                                                 <div id="doctor_list" class="list-group">
-                                                    {% for doctor in all_doctors %}
+                                                    {% for doctor in available_schedule %}
                                                     {% if doctor["occupied"] == False %}
-                                                    <a id="{{doctor['last_name']}} {{doctor['first_name']}} {{doctor['start_time']}}:{{doctor['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}', '{{doctor['start_time']}}', '{{doctor['duration']}}')">
+                                                    <a id="{{doctor['last_name']}} {{doctor['first_name']}} {{doctor['start_time']}}:{{doctor['duration']}}min" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="view_profile('{{ doctor[ 'id' ]}}', '{{ doctor[ 'last_name' ]}}' + ' ' + '{{ doctor[ 'first_name' ]}}', '{{ doctor[ 'field' ]}}', '{{ doctor[ 'introduction' ]}}', '{{ doctor[ 'rate' ]}}', '{{doctor['start_time']}}', '{{doctor['duration']}}', '{{ comments[doctor['id']] }}')">
                                                         <br>{{doctor["last_name"] + " " + doctor["first_name"]}}
                                                         <br>{{doctor["start_time"]}}
                                                         <br>{{doctor["duration"]}}min
@@ -479,6 +492,9 @@
                                                         <p><strong>Introduction: </strong> </p>
                                                         <p id="show_intro">
                                                         </p>
+                                                        <p><strong>Previous Comments: </strong> </p>
+                                                        <textarea id="show_comments" style="width: 400px; height: 300px" readonly>
+                                                        </textarea>
 
                                                     </div>
 
@@ -494,13 +510,68 @@
                             </div>
                         </div>
                         <!--End of Appointment Interface-->
+                        <div class='card mb-3' id="my_past_schedule" hidden>
+                        <div class="card-header py-2 mb-3">
+                            <h6 class="m-0 font-weight-bold text-primary">My Past Schedule</h6>
+                        </div>
 
-                        <!--Start of Payment Interface-->
-                        <br>
-                        <hr/>
-                        <br>
+                        <div class="card-group" style="height:300px">
 
-                </div>
+                            <div class='card col-3 mb-4'>
+                                <div style="height:300px; overflow-y:scroll;">
+                                    <div id="schedule_list" class="list-group">
+                                            {% for s in my_past_schedule %}
+                                                <a id="{{s['start_time']}}:{{s['duration']}}min" class="list-group-item list-group-item-action bg-success text-white" style="font-size: 12px;" onclick="show_schedule_detail('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '{{s['comments']}}', '{{s['appointment_id']}}')">
+                                                    <br>{{s["start_time"]}}
+                                                    <br>{{s["duration"]}}min
+                                                </a>
+                                            {% endfor %}
+                                            <strong id="current_id" hidden>init</strong>
+                                        <strong id="current_schedule_id" hidden>init</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--Start of Schedule Info-->
+                            <div class='card mb-4' id='schedule_info' style="height:300px; overflow-y:scroll;">
+
+                                <!--Start of Schedule Detail-->
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="well profile" id="schedule_detail" hidden>
+                                            <p><strong>Start From: </strong></p>
+                                            <p id="schedule_time">
+                                            </p>
+                                            <p><strong>Duration: </strong> </p>
+                                            <p id="schedule_duration">
+                                            </p>
+                                            <p><strong>Scheduled with: </strong> </p>
+                                            <p id="schedule_patient">
+                                            </p>
+                                            <p><strong>Location: </strong> </p>
+                                            <p id="schedule_location">
+                                            </p>
+                                            <h2 id="selected_schedule" hidden>None</h2>
+                                            <h2 id="selected_appointment" hidden>None</h2>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--End of Schedule Detail-->
+
+
+                            </div>
+                            <!--End of Schedule Info-->
+                            <div class='card col-6 mb-4'>
+                                <textarea style="height:230px; overflow-y:scroll;" id="comments_area" disabled>
+                                </textarea>
+                                <button class="btn-primary" onclick="make_comments()" id="make_comment_button" disabled>Comment</button>
+                            </div>
+
+                        </div>
+
+
                 <!-- End of Main Content -->
 
                 <footer class="sticky-footer bg-white">
@@ -513,7 +584,72 @@
                 <!-- End of Footer -->
 
             </div>
+
         </div>
+                <div class='card mb-3' id="my_upcoming_schedule" hidden>
+                        <div class="card-header py-2 mb-3">
+                            <h6 class="m-0 font-weight-bold text-primary">My Upcoming Schedule</h6>
+                        </div>
+
+                        <div class="card-group" style="height:300px">
+
+                            <div class='card col-3 mb-4'>
+                                <div style="height:300px; overflow-y:scroll;">
+                                    <div id="schedule_list" class="list-group">
+                                                    {% for s in my_upcoming_schedule %}
+                                                        {% if s['status']=='accepted' %}
+                                                            <a id="{{s['start_time']}}:{{s['duration']}}min2" class="list-group-item list-group-item-action bg-primary text-white" style="font-size: 12px;" onclick="show_schedule_detail_upcoming('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '{{s['appointment_id']}}', '{{ s['status'] }}')">
+                                                                <br>{{s["start_time"]}}
+                                                                <br>{{s["duration"]}}min
+                                                            </a>
+                                                        {% else %}
+                                                            <a id="{{s['start_time']}}:{{s['duration']}}min2" class="list-group-item list-group-item-action bg-secondary text-white" style="font-size: 12px;" onclick="show_schedule_detail_upcoming('{{s['start_time']}}', '{{s['duration']}}', '{{s['last_name']}}', '{{s['first_name']}}', '{{s['location']}}', '{{ s['appointment_id'] }}', '{{ s['status'] }}')">
+                                                            <br>{{s["start_time"]}}
+                                                            <br>{{s["duration"]}}min
+                                                        </a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <strong id="current_id2" hidden>init</strong>
+                                        <strong id="current_schedule_id2" hidden>init</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Start of Schedule Info-->
+                            <div class='card mb-4' id='schedule_info2' style="height:300px; overflow-y:scroll;">
+                                <div class="btn-group">
+                                    <button id="cancel_appointment_button" class="btn-warning" onclick="cancel_appointment()" disabled>Cancel Appointment</button>
+                                </div>
+
+                                <!--Start of Schedule Detail-->
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="well profile" id="schedule_detail2" hidden>
+                                            <p><strong>Start From: </strong></p>
+                                            <p id="schedule_time2">
+                                            </p>
+                                            <p><strong>Duration: </strong> </p>
+                                            <p id="schedule_duration2">
+                                            </p>
+                                            <p><strong>Scheduled with: </strong> </p>
+                                            <p id="schedule_patient2">
+                                            </p>
+                                            <p><strong>Location: </strong> </p>
+                                            <p id="schedule_location2">
+                                            </p>
+                                            <h2 id="selected_schedule2" hidden>None</h2>
+                                            <h2 id="selected_appointment2" hidden>None</h2>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--End of Schedule Detail-->
+
+
+                            </div>
+
+                        </div>
+                    </div>
     </div>
     <!-- End of Content Wrapper -->
 
@@ -561,7 +697,7 @@
 <!--id="current-provider"-->
 <!--id="new-provider"-->
 <script type="text/javascript">
-    function view_profile(id, name, field, introduction, rate, time, duration) {
+    function view_profile(id, name, field, introduction, rate, time, duration, comments) {
         document.getElementById("current_id").textContent = id;
         document.getElementById("show_name").textContent = name;
         document.getElementById("show_field").textContent = field;
@@ -571,6 +707,7 @@
         document.getElementById("appointment_date_new").value = time.replace(' ', 'T');
         document.getElementById("duration_new").value = duration;
         document.getElementById("input_doctor_new").value = name;
+        document.getElementById("show_comments").textContent = comments;
 
     }
 
@@ -604,22 +741,50 @@
         document.getElementById("new-provider").disabled = !state;
     }
 
+    function set_my_past_schedule(state) {
+        document.getElementById("my_past_schedule").hidden = !state;
+        document.getElementById("my_past_schedule").disabled = !state;
+    }
+
+    function set_my_upcoming_schedule(state) {
+        document.getElementById("my_upcoming_schedule").hidden = !state;
+        document.getElementById("my_upcoming_schedule").disabled = !state;
+    }
+
+    function show_upcoming_schedule() {
+        set_patient_info(false);
+        set_current_provider(false);
+        set_new_provider(false);
+        set_my_past_schedule(false);
+        set_my_upcoming_schedule(true);
+    }
+
     function show_patient_info() {
         set_patient_info(true);
         set_current_provider(false);
         set_new_provider(false);
+        set_my_past_schedule(false);
+        set_my_upcoming_schedule(false);
+    }
+
+    function show_past_schedule() {
+        set_my_past_schedule(true);
+        set_current_provider(false);
+        set_new_provider(false);
+        set_patient_info(false);
+        set_my_upcoming_schedule(false);
     }
 
     function show_provider() {
         set_patient_info(false);
+        set_my_past_schedule(false);
+        set_my_upcoming_schedule(false);
         {% if my_provider %}
-            console.log("I have a provider");
             set_new_provider(false);
             set_current_provider(true);
             document.getElementById("current_doctor_name").textContent = "{{ my_provider['last_name'] }}" + " " + "{{ my_provider['first_name'] }}";
             document.getElementById("current_doctor_intro").textContent = "{{ my_provider['introduction'] }}";
         {% else %}
-            console.log("I don't have a provider");
             set_new_provider(true);
             set_current_provider(false);
         {% endif %}
@@ -634,7 +799,7 @@
         {% for doctor in all_doctors %}
         {% if doctor['occupied'] == False %}
         console.log("{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}", "{{doctor['start_time']}}", "{{doctor['duration']}}");
-            if (d === "{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}" && time == "{{doctor['start_time']}}"&& duration == "{{doctor['duration']}}"){
+            if (d === "{{doctor['last_name']}}" + " " + "{{ doctor['first_name']}}" && time === "{{doctor['start_time']}}"&& duration === "{{doctor['duration']}}"){
                 console.log("here2", d, time, duration);
                 document.getElementById("{{doctor['last_name']}} {{doctor['first_name']}} {{doctor['start_time']}}:{{doctor['duration']}}min").hidden = false;
 
@@ -669,6 +834,55 @@
 
     }
 
+    function show_schedule_detail(start_time, duration, doctor_last_name, doctor_first_name, location, comments, appointment_id){
+        document.getElementById("schedule_detail").hidden = false;
+        document.getElementById("schedule_time").textContent = start_time;
+        document.getElementById("schedule_duration").textContent = duration;
+
+        document.getElementById("make_comment_button").disabled=false;
+        document.getElementById("comments_area").disabled=false;
+        document.getElementById("comments_area").value = comments;
+        document.getElementById("schedule_patient").textContent = "Doctor " + doctor_last_name + " " + doctor_first_name;
+        document.getElementById("selected_appointment").textContent = appointment_id;
+
+        document.getElementById("schedule_location").textContent = location;
+        document.getElementById("selected_schedule").textContent = start_time;
+    }
+
+    function show_schedule_detail_upcoming(start_time, duration, patient_last_name, patient_first_name, location, appointment_id, status){
+        document.getElementById("schedule_detail2").hidden = false;
+        document.getElementById("schedule_time2").textContent = start_time;
+        document.getElementById("schedule_duration2").textContent = duration;
+        document.getElementById("schedule_patient2").textContent = patient_last_name + " " + patient_first_name;
+        document.getElementById("selected_appointment2").textContent = appointment_id;
+
+
+        if (status === "pending") {
+            document.getElementById("cancel_appointment_button").disabled = false;
+        }
+        else {
+            document.getElementById("cancel_appointment_button").disabled = true;
+        }
+        document.getElementById("schedule_location2").textContent = location;
+        document.getElementById("selected_schedule2").textContent = start_time;
+    }
+
+    function make_comments(){
+        let content = document.getElementById("comments_area").value;
+        content = content.replace(/\n/g, JSON.stringify("\n").replace(/"/g, ""));
+        const appointment_id = document.getElementById("selected_appointment").textContent;
+        if (confirm("Are you sure?")) {
+            location.href = "{{ url_for('patient.comment') }}?comments=" + content
+                    + '&appointment_id=' + appointment_id;
+        }
+    }
+
+    function cancel_appointment(){
+        const appointment_id = document.getElementById("selected_appointment2").textContent;
+        if (confirm("Are you sure")){
+            location.href = '{{ url_for('patient.cancel_appointment') }}?appointment_id=' + appointment_id;
+        }
+    }
 
 </script>
 

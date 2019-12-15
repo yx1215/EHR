@@ -16,8 +16,8 @@ def show_main():
                                      "WHERE doctor_id=? and status=?",
                                      (g.user["id"], 'pending')).fetchall()
     my_patient = db.execute("SELECT * FROM take_care JOIN patients on patients.id=take_care.patient_id "
-                                      "WHERE doctor_id=?",
-                                     (g.user["id"], )).fetchall()
+                            "WHERE doctor_id=?",
+                            (g.user["id"], )).fetchall()
     medical_his = db.execute("SELECT * FROM appointment WHERE doctor_id=? AND status='accepted' ORDER BY start_time", (g.user["id"], )).fetchall()
 
     my_schedule = db.execute("SELECT schedule.start_time, schedule.duration, a.location, p.last_name, p.first_name, a.medical_his, a.appointment_id, a.status FROM schedule "
@@ -103,6 +103,18 @@ def write_medical_his():
     db.execute("UPDATE appointment SET medical_his=? WHERE appointment_id=?", (medical_his, appointment_id))
     db.commit()
     return redirect(url_for("doctor.show_main"))
+
+
+@doctor_bp.route("/finish_appointment", methods=('GET', 'POST'))
+@login_required_doctor
+def finish_appointment():
+    start_time = request.args['start_time']
+    doctor_id = request.args['doctor_id']
+    db = get_db()
+    db.execute('UPDATE appointment SET status=? WHERE start_time=? AND doctor_id=?',
+               ('finished', start_time, doctor_id))
+    db.commit()
+    return redirect(url_for('doctor.show_main'))
 
 
 @doctor_bp.route('/message', methods=("GET", ))
