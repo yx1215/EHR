@@ -81,7 +81,7 @@
                         <textarea id="typemessage"></textarea>
                     </div>
                     <div class="ui button" tabindex="0" id="btn">Message</div>
-
+                    <div class="ui button" onclick="return_to_main()">Back</div>
                 </div>
             </div>
         </div>
@@ -104,4 +104,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
 <script src="/static/js/msg/app.js"></script>
 <script src="/static/js/msg/prism.js"></script>
+<script>
+    function return_to_main() {
+        let url;
+        {% if g.type == 'patient' %}
+        url = '{{ url_for('patient.show_main') }}';
+        {% elif g.type == 'admin' %}
+        url = '{{ url_for('admin.show_main') }}';
+        {% else %}
+        url = '{{ url_for('doctor.show_main') }}';
+        {% endif %}
+        location.href = url;
+    }
+</script>
 </html>
