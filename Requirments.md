@@ -72,8 +72,8 @@ There are three types of users in our system: administrators, patients and docto
 - **Forget Password**
 Users will be able to change passwords in case they forget the passwords. To change the password, the users have to provide some information of the account when registering it such as the email and phone number used to register the account.
 
-- **Chat System**
-We provide the functionality of chatting in our system. Anyone would be able to send message to others prividing the email address that they want to send message to. And anyone who receive the message will get a notification.
+- **Message System**
+We provide the functionality of sending messages in our system. Anyone would be able to send message to others prividing the email address that they want to send thr message to. And anyone who receive the message will get a notification.
 
 ### Administrators
 - **Browse doctors**
