@@ -30,7 +30,7 @@
     - [x] Relection By Yixiang Xiao
     - [ ] Relection By Yunxiao Song
     - [x] Relection By Xiyan Cai
-    - [ ] Relection By Chonglin Zhu
+    - [x] Relection By Chonglin Zhu
 ## Introduction
 (2pts)
 
@@ -42,13 +42,13 @@ A brief description of your project (make use of HW1)
 ## Design Process
 (5pts)
 - We release the bi-weekly artifects throught the semester. The order is: 
-    1. login, registration: in the first iteration, we mostly learnt to get familiar with the coding language and environment. The login and registration situations are different among different stakeholders (see [General Cases](#General-Cases))
-    2. request appointment, accept appointment: this stage connected the functions of patients' and doctors' by sending and accepting appointment requests, respectively.
-    3. medical history report: it is a refactored stage. In the end, after each appointment, a doctor is required to finish the medical history report regarding to that appointment. Doctors can view their patients' medical history but cannot edit it.
-    4. message system
-    5. emergency contact button, send notification: 
-        - the emergency contact button is designed at first. However, we did not think is is reasonable compared to directly dialing 120. However, if a doctor is logging his e-mail in his phone, once a patient clicks this button, he will receive an e-mail. Then a doctor can choose to present at the hospital even if he is not on duty to support the treatment. 
-        - As for sending notification, it is a function that is not initially planned. We had problem connecting it with the message system since they are in different servers. Then we decided to present the notification as a flashed message from HTML instead of a received e-mail. 
+    1. Login, registration: In the first iteration, we mostly learnt to get familiar with the coding language and environment. The login and registration situations are different among different stakeholders (see [General Cases](#General-Cases))
+    2. Request appointment, accept appointment: This stage connected the functions of patients' and doctors' by sending and accepting appointment requests, respectively.
+    3. Medical history report: It is a refactored stage. In the end, after each appointment, a doctor is required to finish the medical history report regarding to that appointment. Doctors can view their patients' medical history but cannot edit it.
+    4. Message System
+    5. Emergency contact button, Send notification: 
+        - The emergency contact button is designed at first. It may not seem to be reasonable comparing to directly dialing 120. However, if a doctor is logging into his account in his phone, once a patient clicks this button, he will receive an instant message marked urgent. Then the doctor can choose to present at the hospital even if he is not on duty to support the treatment. 
+        - As for sending notification, it is a function that is not initially planned. Although the message system provides some apis to send notifications to a certain person, a recent recieved notification will not be presented on the dashboard without manually refreshing the homepage, unlike the delicated page for message. Then we decided to present the notification as a flashed message from HTML instead of a received message. 
 - In the first two stages, the development was not too complicated. However, we have refactored the medical history report for many times. 
     - It is due to the problematic use case design at first.
     - Previously, we plan to associate the medical history report with each patient as a database feature in the type of "text". 
@@ -73,7 +73,7 @@ There are three types of users in our system: administrators, patients and docto
 Users will be able to change passwords in case they forget the passwords. To change the password, the users have to provide some information of the account when registering it such as the email and phone number used to register the account.
 
 - **Message System**
-We provide the functionality of sending messages in our system. Anyone would be able to send message to others prividing the email address that they want to send thr message to. And anyone who receive the message will get a notification.
+We provide the functionality of sending messages in our system. Anyone would be able to send message to others prividing the email address that they want to send thr message to. And anyone who receives the message will get a notification.
 
 ### Administrators
 - **Browse doctors**
@@ -158,4 +158,4 @@ During the whole process of doing the project, I am in charge of the backend par
     - I have mostly done the backend part of the project in addition to the separated message system. I also planned and organized each weekly meetings to facilitate the project progress. As a relection, I at first chose to use Python Flask as our base language since all of the team members are familiar with Python. However, it was actually a good moment to push myself to learn a new programming language and get command of it by practicing it on a project. Besides, our team did not plan the whole agile progress and the specific tasks of each team member, which resulted in the problems like less communication within the team and missing a teammate during several iterations. 
     - When we were designing the user cases, we did not consider the aspect of being user friendly. Instead, the purpose of our design lied in how to connect the systems as a whole and make it function smoothly. Therefore, it resulted in the unser-unfriendly experiences like adding medical history report. Therefore, we should have put the user-friendly design into consideration at every moment of conducting a design.
     - Last but not the least, we did not have the document to keep the process of our work and to be refered at any time when we had confusion on the design.
-- **Reflection By Chongling Zhu**
+- **Reflection By Chongling Zhu** I mainly designed and built the message system and incorporated it into the main system, and also fix some bugs. In the development of this software engineering project, I learned a lot. Firstly, I realized that practice makes perfect. I had learned a lot of front-end and back-end developing techniques in either the previous coursework or internship experiences. This project gave me the opportunity to practice those techniques again. In the process, I found out that I previously had some wrong understandings on some usages of the frameworks, and I also master some novel usages of them. Though the practice, my skills also got improved. Secondly, I was mainly working on solo projects previously, where I took care of everything on my own and in my own way. However, this is a group project, where there's a division of work involved. So we need to agree on a lot of things at first, which is difficult because different people tend to have different opinions. Likewise, I found out that I may have a lot of difficulties understanding codes which are written by other group members. All of the factors make it a real "software engineering" project, which gives me a bite of what would be like in my future careers. The project helps me learn how to communicate and work with other people to achieve "1+1>2." Last but not least, the course content itself had a good introduction to some basic concepts on software engineering, which not only broadens my understandings and also helps me to better implement this project. In a word, it was a very great experience.
