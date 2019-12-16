@@ -18,7 +18,7 @@ def show_main():
     my_patient = db.execute("SELECT * FROM take_care JOIN patients on patients.id=take_care.patient_id "
                             "WHERE doctor_id=?",
                             (g.user["id"], )).fetchall()
-    medical_his = db.execute("SELECT * FROM appointment WHERE doctor_id=? AND status='accepted' ORDER BY start_time", (g.user["id"], )).fetchall()
+    medical_his = db.execute("SELECT * FROM appointment WHERE doctor_id=? AND status<>'pending' ORDER BY start_time", (g.user["id"], )).fetchall()
 
     my_schedule = db.execute("SELECT schedule.start_time, schedule.duration, a.location, p.last_name, p.first_name, a.medical_his, a.appointment_id, a.status FROM schedule "
                              "LEFT OUTER JOIN appointment a on schedule.doctor_id = a.doctor_id and schedule.start_time=a.start_time "
