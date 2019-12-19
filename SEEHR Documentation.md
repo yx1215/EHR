@@ -15,7 +15,7 @@
     - Reflection By Yixiang Xiao
     - Reflection By Yunxiao Song
     - Reflection By Xiyan Cai
-    - Reflection By Chonglin Zhu
+    - Reflection By Chongling Zhu
 ## Introduction
 
 - With more and more people enjoying electronic medical devices and devote more trust in it, it is feasible to build an electronic health record (EHR) system to cut down hospitals' spending on hiring people working for registration and reduce the time spent on searching and scheduling. EHR stores patients' medical history records without the risk of losing the medical history book. Using data, it stores all settings that could provide plenty of health care services for patients. Also, it gives doctors decision opportunities based on the recorded information; meanwhile, it offers automated and streamlined workflows.
@@ -29,8 +29,8 @@ The last name of our system is SEEHR, which is a combination of SE (Software Eng
     3. medical history report: it is a refactored stage. In the end, after each appointment, a doctor is required to finish the medical history report regarding that appointment. Doctors can view their patients' medical history but cannot edit it.
     4. message system
     5. emergency contact button, send the notification: 
-        - The emergency contact button is designed at first. However, we did not think it is reasonable compared to dial 120 directly. However, if a doctor is logging his e-mail on his phone, once a patient clicks this button, he will receive an e-mail. Then a doctor can choose to present at the hospital even if he is not on duty to support the treatment. 
-        - As for sending a notification, it is a function that is not initially planned. We had a problem connecting it with the message system since they are on different servers. Then we decided to present the notification as a flashed message from HTML instead of a received e-mail. 
+        - The emergency contact button is designed at first. It may not seem to be reasonable comparing to directly dialing 120. However, if a doctor is logging into his account in his phone, once a patient clicks this button, he will receive an instant message marked urgent. Then the doctor can choose to present at the hospital even if he is not on duty to support the treatment.
+        - As for sending notification, it is a function that is not initially planned. Although the message system provides some apis to send notifications to a certain person, a recent recieved notification will not be presented on the dashboard without manually refreshing the homepage, unlike the delicated page for message. Then we decided to present the notification as a flashed message from HTML instead of a received message.
 - In the first two stages, the development was not too complicated. However, we have refactored the medical history report for many times. 
     - It is due to the problematic use of case design at first.
     - Previously, we plan to associate the medical history report with each patient as a database feature in the type of "text". 
@@ -170,3 +170,7 @@ The first thing we design is how we log in to the system. Then, since there are 
     - When we were designing the user cases, we did not consider the aspect of being user-friendly. Instead, the purpose of our design lied in how to connect the systems as a whole and make it function smoothly. Therefore, it resulted in user-unfriendly experiences like adding a medical history report. Consequently, we should have put the user-friendly design into consideration at every moment of conducting a design.
     - Last but not least, we did not have the document to keep the process of our work and to be referred at any time when we had confusion on the design.
 - **Reflection By Chongling Zhu**
+    - I mainly designed and built the message system and incorporated it into the main system, and also helped fix some bugs in the main system. I learned a lot in the development of this software engineering project.
+    - Firstly, I realized that practice makes perfect. I had learned a lot of front-end and back-end developing techniques in either previous coursework or internship experiences. This project gave me the opportunity to practice those techniques again. In the process, I found out that I previously had some wrong understandings on some usages of the frameworks, and I also master some novel usages of them. Though the practice, my skills got improved again.
+    - Secondly, I was mainly working on solo projects previously, where I took care of everything on my own and in my own way. However, this is a group project, where there's a division of work involved. So we need to agree on a lot of things at first, which is difficult because different people tend to have different opinions. Likewise, I found out that I may have some difficulties understanding codes written by other group members. All of the factors make it a real "software engineering" project, which gives me a bite of what would be like in my future careers. The project lets me learn how to communicate and work with other people to achieve something like "1+1>2."
+    - Last but not least, the course content itself had a good introduction to some basic concepts on software engineering, which not only broadens my understandings and also helps me better implement this project. In a word, it was a really great experience.
